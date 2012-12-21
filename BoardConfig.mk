@@ -1,5 +1,7 @@
 USE_CAMERA_STUB := true
 
+-include device/samsung/smdk4412-common/BoardCommonConfig.mk
+
 # inherit from the proprietary version
 -include vendor/samsung/t0lte/BoardConfigVendor.mk
 
