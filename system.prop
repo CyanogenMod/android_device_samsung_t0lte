@@ -1,0 +1,17 @@
+#
+# system.prop for t0lte
+#
+
+rild.libpath=/system/lib/libril-qc-qmi-1.so
+rild.libargs=-d /dev/ttyS0
+ro.sf.lcd_density=320
+ro.lcd_min_brightness=20
+
+# System property ril adb log on
+persist.radio.adb_log_on=1
+
+# For sys info indication
+persist.radio.add_power_save=1
+
+# System property for SIM
+persist.radio.apm_sim_not_pwdn=1
