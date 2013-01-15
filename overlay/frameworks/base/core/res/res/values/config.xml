@@ -112,10 +112,14 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
-    <!-- Boolean to enable stylus gestures -->
-    <!--<bool name="config_stylusGestures">true</bool>-->
-
     <!-- Boolean to enable stk functionality on Samsung phones -->
     <bool name="config_samsung_stk">true</bool>
+
+    <!-- Set additional audio parameters for incall audio
+         Usage: parameter=onstring=offstring
+         Examples: <item>realcall=on=off</item> <item>dualmic_enabled=true=false</item> <item>mic_boost=yes=no</item> -->
+    <string-array name="config_telephony_set_audioparameters" translatable="false">
+		<item>realcall=on=on</item>
+    </string-array>
 
 </resources>
