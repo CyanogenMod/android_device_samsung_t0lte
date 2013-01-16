@@ -1,7 +1,7 @@
 import init.smdk4x12.usb.rc
 import init.bt.rc
 
-on early-init
+on init
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage 0550 system sdcard_r
     mkdir /storage/emulated 0555 root root
