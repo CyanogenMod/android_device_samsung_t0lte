@@ -35,9 +35,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-	$(LOCAL_PATH)/configs/default_gain.conf:system/etc/default_gain.conf \
-	$(LOCAL_PATH)/configs/tinyucm.conf:system/etc/tinyucm.conf
+    $(LOCAL_PATH)/configs/tiny_hw.xml:system/etc/sound/t0lte
 
 # Gps
 PRODUCT_COPY_FILES += \
