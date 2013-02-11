@@ -196,6 +196,7 @@ struct m0_dev_cfg {
 
 void *mCsdHandle;
 int rx_dev_id, tx_dev_id;
+int voice_index;
 
 static int (*csd_client_init)();
 static int (*csd_client_deinit)();
@@ -530,17 +531,20 @@ static void set_incall_device(struct m0_audio_device *adev)
         case AUDIO_DEVICE_OUT_EARPIECE:
             rx_dev_id = DEVICE_HANDSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
+            voice_index = 5;
             break;
         case AUDIO_DEVICE_OUT_SPEAKER:
         case AUDIO_DEVICE_OUT_AUX_DIGITAL:
         case AUDIO_DEVICE_OUT_DGTL_DOCK_HEADSET:
-                rx_dev_id = DEVICE_SPEAKER_MONO_RX_ACDB_ID;
-                tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
+            rx_dev_id = DEVICE_SPEAKER_MONO_RX_ACDB_ID;
+            tx_dev_id = DEVICE_SPEAKER_TX_ACDB_ID;
+            voice_index = 7;
             break;
         case AUDIO_DEVICE_OUT_WIRED_HEADSET:
         case AUDIO_DEVICE_OUT_WIRED_HEADPHONE:
-                rx_dev_id = DEVICE_HEADSET_RX_ACDB_ID;
-                tx_dev_id = DEVICE_HEADSET_TX_ACDB_ID;
+            rx_dev_id = DEVICE_HEADSET_RX_ACDB_ID;
+            tx_dev_id = DEVICE_HEADSET_TX_ACDB_ID;
+            voice_index = 5;
             break;
         case AUDIO_DEVICE_OUT_BLUETOOTH_SCO:
         case AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET:
@@ -552,10 +556,12 @@ static void set_incall_device(struct m0_audio_device *adev)
                 rx_dev_id = DEVICE_BT_SCO_RX_ACDB_ID;
                 tx_dev_id = DEVICE_BT_SCO_TX_ACDB_ID;
             }
+            voice_index = 5;
             break;
         default:
             rx_dev_id = DEVICE_HANDSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
+            voice_index = 5;
             break;
     }
 
@@ -583,6 +589,8 @@ static void set_incall_device(struct m0_audio_device *adev)
             ALOGE("%s: csd_switch_device failed, error %d", __func__, err);
         }
     }
+
+    adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
 }
 
 static void set_input_volumes(struct m0_audio_device *adev, int main_mic_on,
@@ -642,7 +650,7 @@ static void select_mode(struct m0_audio_device *adev)
                 adev->out_device &= ~AUDIO_DEVICE_OUT_SPEAKER;
             select_output_device(adev);
             start_call(adev);
-            adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
+            //adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
             adev->in_call = 1;
         }
     } else {
@@ -2696,11 +2704,13 @@ static int adev_set_voice_volume(struct audio_hw_device *dev, float volume)
 
     adev->voice_volume = volume;
 
+    ALOGD("%s: Voice Index: %i", __func__, voice_index);
+
     if (adev->mode == AUDIO_MODE_IN_CALL) {
         if (csd_volume_index == NULL) {
             ALOGE("dlsym: Error:%s Loading csd_volume_index", dlerror());
         } else {
-            volume = volume * 5;
+            volume = volume * voice_index;
             ALOGD("%s: calling csd_volume_index(%f)", __func__, volume);
             csd_volume_index(volume);
         }
