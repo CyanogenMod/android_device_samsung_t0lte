@@ -410,8 +410,13 @@ static int start_call(struct m0_audio_device *adev)
 
     bt_on = adev->out_device & AUDIO_DEVICE_OUT_ALL_SCO;
 
-    /* use amr-wb by default */
-    pcm_config_vx.rate = VX_WB_SAMPLING_RATE;
+    if(bt_on){
+       /* use amr-nb for bluetooth */
+       pcm_config_vx.rate = VX_NB_SAMPLING_RATE;
+    }else{
+       /* use amr-wb by default */
+       pcm_config_vx.rate = VX_WB_SAMPLING_RATE;
+    }
 
     /* Open modem PCM channels */
     if (adev->pcm_modem_dl == NULL) {
@@ -439,9 +444,6 @@ static int start_call(struct m0_audio_device *adev)
     /* Open bluetooth PCM channels */
     if (bt_on) {
         ALOGV("Opening bluetooth PCMs");
-        /* use amr-nb for bluetooth */
-        pcm_config_vx.rate = VX_NB_SAMPLING_RATE;
-
         if (adev->pcm_bt_dl == NULL) {
             ALOGD("Opening PCM bluetooth DL stream");
             adev->pcm_bt_dl = pcm_open(CARD_DEFAULT, PORT_BT, PCM_OUT, &pcm_config_vx);
@@ -591,6 +593,14 @@ static void set_incall_device(struct m0_audio_device *adev)
     }
 
     adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
+
+    /* when switching devices to or from BT we need to stop the modem pcm to change
+     the rate to or from amr_nb */
+    if(adev->in_call){
+      end_call(adev);
+    }
+
+    start_call(adev);
 }
 
 static void set_input_volumes(struct m0_audio_device *adev, int main_mic_on,
@@ -649,8 +659,6 @@ static void select_mode(struct m0_audio_device *adev)
             } else
                 adev->out_device &= ~AUDIO_DEVICE_OUT_SPEAKER;
             select_output_device(adev);
-            start_call(adev);
-            //adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
             adev->in_call = 1;
         }
     } else {
