@@ -42,10 +42,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps.xml:system/etc/gps.xml \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
 
-# Camera FW
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/80cfw:system/etc/init.d/80cfw
-
 # Product specific Packages
 PRODUCT_PACKAGES += \
     GalaxyNote2Settings
