@@ -21,9 +21,14 @@
 
 LOCAL_PATH := device/samsung/t0lte
 
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/t0lte/include
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/vnd_t0lte.txt
+
+# GPS
+BOARD_HAVE_NEW_QC_GPS := true
 
 # RIL
 COMMON_GLOBAL_CFLAGS += -DPROPERTY_PERMS_APPEND='{ "ril.ks.status", AID_SYSTEM, 0 },'

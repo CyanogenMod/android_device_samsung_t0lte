@@ -19,12 +19,8 @@ system/lib/libdiag.so
 system/lib/libdsi_netctrl.so
 system/lib/libdsutils.so
 system/lib/libfactoryutil.so
-system/lib/libgps.so
-system/lib/libgps.utils.so
 system/lib/libidl.so
-system/lib/libloc_adapter.so
 system/lib/libloc_api_v02.so
-system/lib/libloc_eng.so
 system/lib/libnetmgr.so
 system/lib/libomission_avoidance.so
 system/lib/libqcci_legacy.so
@@ -44,7 +40,6 @@ system/lib/libsecnativefeature.so
 system/lib/libsecril-client.so
 system/lib/libsensorhubservice.so
 system/lib/hw/vendor-camera.exynos4.so
-system/lib/hw/gps.default.so
 system/lib/hw/sensorhubs.smdk4x12.so
 system/lib/hw/sensors.smdk4x12.so
 system/usr/idc/sec_e-pen.idc
