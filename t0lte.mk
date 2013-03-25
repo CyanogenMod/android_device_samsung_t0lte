@@ -37,9 +37,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/tiny_hw.xml:system/etc/sound/t0lte
 
-# Gps
+# GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps.xml:system/etc/gps.xml \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
 
 # Product specific Packages
@@ -89,5 +88,6 @@ PRODUCT_COPY_FILES += \
 
 # Include common makefile
 $(call inherit-product, device/samsung/smdk4412-common/common.mk)
+$(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
 
 $(call inherit-product-if-exists, vendor/samsung/t0lte/t0lte-vendor.mk)
