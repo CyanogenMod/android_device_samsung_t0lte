@@ -218,27 +218,18 @@ We are able to have most of our routing static so do that
         <ctl name="LINEOUT2N Switch" val="1"/>
         <ctl name="LINEOUT2P Switch" val="1"/>
         <ctl name="LINEOUT2N Mixer Left Output Switch" val="1"/>
+        <ctl name="LINEOUT2N Mixer Right Output Switch" val="0"/>
         <ctl name="LINEOUT2P Mixer Right Output Switch" val="1"/>
         <ctl name="LINE Switch" val="1"/>
-        <ctl name="AIF1DAC1 Volume" val="96"/>
-        <ctl name="AIF1 Boost Volume" val="0"/>
-        <ctl name="DAC1 Volume" val="96"/>
+        <ctl name="LineoutSwitch Mode" val="1"/>
         <ctl name="Left Output Mixer DAC Volume" val="7"/>
         <ctl name="Right Output Mixer DAC Volume" val="7"/>
-        <ctl name="Output Volume" val="55"/>
-        <ctl name="Earpiece Volume" val="1"/>
     </path>
     <path name="off">
+        <ctl name="LineoutSwitch Mode" val="0"/>
         <ctl name="LINEOUT2N Switch" val="0"/>
         <ctl name="LINEOUT2P Switch" val="0"/>
         <ctl name="LINE Switch" val="0"/>
-        <ctl name="AIF1DAC1 Volume" val="96"/>
-        <ctl name="AIF1 Boost Volume" val="0"/>
-        <ctl name="DAC1 Volume" val="96"/>
-        <ctl name="Left Output Mixer DAC Volume" val="7"/>
-        <ctl name="Right Output Mixer DAC Volume" val="7"/>
-        <ctl name="Output Volume" val="57"/>
-        <ctl name="LINEOUT2 Volume" val="1"/>
     </path>
 </device>
 <device name="digital-dock">
