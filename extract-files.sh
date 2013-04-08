@@ -25,7 +25,7 @@ adb root
 adb wait-for-device
 
 echo "Pulling proprietary files..."
-for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$`; do
+for FILE in `cat ../$DEVICE/proprietary-files.txt | grep -v ^# | grep -v ^$`; do
     DIR=`dirname $FILE`
     if [ ! -d ../../../vendor/$VENDOR/$DEVICE/proprietary/$DIR ]; then
         mkdir -p ../../../vendor/$VENDOR/$DEVICE/proprietary/$DIR

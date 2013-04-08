@@ -1,6 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),t0lte)
+ifneq ($(filter t0lte t0lteatt t0ltetmo,$(TARGET_DEVICE)),)
 
 include $(CLEAR_VARS)
 
