@@ -36,7 +36,7 @@
     <string name="mdnie_negative_summary_head">Activer/désactiver les couleurs inversées</string>
     <string name="led_subcat_title">LED de notification</string>
     <string name="led_fade_title_head">LED progressive</string>
-    <string name="led_fade_summary_head">Activer l\'éclairage progressif à la place du clignotement</string>
+    <string name="led_fade_summary_head">Préférer l\'éclairage progressif au clignotement</string>
     <string name="touchkey_subcat_title">Touches tactiles</string>
     <string name="touchkey_light_title_head">Rétroéclairage</string>
     <string name="touchkey_light_summary_off">Activer le rétroéclairage des touches tactiles lorsque l\'écran est activé</string>
