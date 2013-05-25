@@ -139,7 +139,7 @@ struct effect_info_s {
 #define NUM_IN_AUX_CNL_CONFIGS 2
 channel_config_t in_aux_cnl_configs[NUM_IN_AUX_CNL_CONFIGS] = {
     { AUDIO_CHANNEL_IN_FRONT , AUDIO_CHANNEL_IN_BACK},
-    { AUDIO_CHANNEL_IN_STEREO , AUDIO_CHANNEL_IN_RIGHT}
+    { AUDIO_CHANNEL_IN_STEREO , AUDIO_CHANNEL_IN_MONO}
 };
 
 struct m0_stream_in {
@@ -596,7 +596,8 @@ static void set_incall_device(struct m0_audio_device *adev)
     adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
 
     /* Restart pcm only if switching off or onto bt to adjust to amr */
-    if(old_rx_dev == DEVICE_BT_SCO_RX_ACDB_ID || rx_dev_id == DEVICE_BT_SCO_RX_ACDB_ID){
+    if((old_rx_dev == DEVICE_BT_SCO_RX_ACDB_ID || rx_dev_id == DEVICE_BT_SCO_RX_ACDB_ID)
+      && adev->mode == AUDIO_MODE_IN_CALL){
         ALOGI("%s: old_rx_dev: %i", __func__, old_rx_dev);
         end_call(adev);
         start_call(adev);
@@ -806,15 +807,19 @@ static void select_output_device(struct m0_audio_device *adev)
 
 static void select_input_device(struct m0_audio_device *adev)
 {
-    switch(adev->in_device) {
+    int input_device = AUDIO_DEVICE_BIT_IN | adev->in_device;
+
+    switch(input_device) {
         case AUDIO_DEVICE_IN_BUILTIN_MIC:
             ALOGD("%s: AUDIO_DEVICE_IN_BUILTIN_MIC", __func__);
             break;
         case AUDIO_DEVICE_IN_BACK_MIC:
             ALOGD("%s: AUDIO_DEVICE_IN_BACK_MIC", __func__);
+         // Force use both mics for video recording
+            adev->in_device = (AUDIO_DEVICE_IN_BACK_MIC | AUDIO_DEVICE_IN_BUILTIN_MIC) & ~AUDIO_DEVICE_BIT_IN;
             break;
-        case AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET:
-            ALOGD("%s: AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET", __func__);
+        case AUDIO_DEVICE_IN_ALL_SCO:
+            ALOGD("%s: AUDIO_DEVICE_IN_ALL_SCO", __func__);
             break;
         case AUDIO_DEVICE_IN_WIRED_HEADSET:
             ALOGD("%s: AUDIO_DEVICE_IN_WIRED_HEADSET", __func__);
@@ -1509,13 +1514,17 @@ static int out_remove_audio_effect(const struct audio_stream *stream, effect_han
 static int start_input_stream(struct m0_stream_in *in)
 {
     int ret = 0;
+    int bt_on;
     struct m0_audio_device *adev = in->dev;
 
     adev->active_input = in;
+    bt_on = in->device & AUDIO_DEVICE_IN_ALL_SCO;
 
     if (adev->mode != AUDIO_MODE_IN_CALL) {
         adev->in_device = in->device;
         select_input_device(adev);
+        if(bt_on)
+            set_incall_device(adev);
     }
 
     if (in->aux_channels_changed)
@@ -1544,8 +1553,13 @@ static int start_input_stream(struct m0_stream_in *in)
                                         AUDIO_FORMAT_PCM_16_BIT,
                                         popcount(in->main_channels),
                                         in->requested_rate);
+    ALOGD("%s: period_size: %d period_count: %d rate: %d channels: %d format: %d"
+      " main_channel: %d aux_channel: %d\n", __func__,in->config.period_size,
+      in->config.period_count,in->config.rate, in->config.channels, in->config.format, 
+      in->main_channels, in->aux_channels);
 
     /* this assumes routing is done previously */
+    ALOGD("%s: Opening PCM Capture",__func__);
     in->pcm = pcm_open(CARD_DEFAULT, PORT_CAPTURE, PCM_IN, &in->config);
     if (!pcm_is_ready(in->pcm)) {
         ALOGE("cannot open pcm_in driver: %s", pcm_get_error(in->pcm));
@@ -1553,6 +1567,9 @@ static int start_input_stream(struct m0_stream_in *in)
         adev->active_input = NULL;
         return -ENOMEM;
     }
+
+    if(bt_on)
+      start_call(adev);
 
     /* force read and proc buf reallocation case of frame size or channel count change */
     in->read_buf_frames = 0;
