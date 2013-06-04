@@ -37,10 +37,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     tiny_hw
 
-# GPS
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
-
 # Product specific Packages
 PRODUCT_PACKAGES += \
     GalaxyNote2Settings
