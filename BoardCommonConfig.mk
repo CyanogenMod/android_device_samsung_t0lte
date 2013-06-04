@@ -31,7 +31,11 @@ COMMON_GLOBAL_CFLAGS += -DCAMERA_WITH_CITYID_PARAM
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/smdk4412
+ifneq ($(filter t0ltecdma i605 l900 r950,$(TARGET_DEVICE)),)
 TARGET_KERNEL_CONFIG := cyanogenmod_t0lte_defconfig
+else
+TARGET_KERNEL_CONFIG := cyanogenmod_t0ltecdma_defconfig
+endif
 
 # assert
 TARGET_OTA_ASSERT_DEVICE := t0lte,t0ltexx,GT-N7105,t0ltedv,GT-N7105T,t0lteatt,SGH-I317,t0ltetmo,SGH-T889,t0ltecan,t0ltevl,SGH-I317M
