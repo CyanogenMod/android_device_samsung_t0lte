@@ -49,7 +49,6 @@
 #define DEEP_BUFFER_LONG_PERIOD_SIZE 880
 #define PLAYBACK_DEEP_BUFFER_LONG_PERIOD_COUNT 8
 
-
 /* minimum sleep time in out_write() when write threshold is not reached */
 #define MIN_WRITE_SLEEP_US 5000
 
@@ -66,9 +65,14 @@
 /* sampling rate when using VX port for wide band */
 #define VX_WB_SAMPLING_RATE 16000
 
-/* product-specific defines */
-#define PRODUCT_DEVICE_PROPERTY "ro.product.device"
-#define PRODUCT_NAME_PROPERTY   "ro.product.name"
+#define AUDIO_DIR "/data/t0lte_audio"
+#define MAX_NUM_VOLUME_FILES 4
+
+/* in-call files */
+#define INCALL_HEADSET "/data/t0lte_audio/incall_headset"
+#define INCALL_HEADPHONE "/data/t0lte_audio/incall_headphone"
+#define INCALL_SPEAKER "/data/t0lte_audio/incall_speaker"
+#define INCALL_BT "/data/t0lte_audio/incall_bt"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
@@ -104,6 +108,13 @@ enum tty_modes {
     TTY_MODE_VCO,
     TTY_MODE_HCO,
     TTY_MODE_FULL
+};
+
+char *volume_file[MAX_NUM_VOLUME_FILES] = {
+    INCALL_HEADSET,
+    INCALL_HEADPHONE,
+    INCALL_SPEAKER,
+    INCALL_BT
 };
 
 /* ACDB Device ID macros */

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+                android:title="@string/dockaudio_subcat_title">
+    <!-- Use Dock Audio -->
+    <CheckBoxPreference
+                android:key="dock_audio"
+                android:title="@string/use_dock_audio_title_head"
+                android:summary="@string/use_dock_audio_summary_head"
+                />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+                android:title="@string/incallaudio_subcat_title">
+
+    <com.cyanogenmod.settings.device.IncallAudio
+            android:key="incall_headset"
+            android:title="@string/incall_headset_audio_title_head"
+            android:summary="@string/incall_headset_audio_summary_head"
+            android:entries="@array/incall_headset_entries"
+            android:entryValues="@array/incall_headset_entries_values" />
+
+    <com.cyanogenmod.settings.device.IncallAudio
+            android:key="incall_headphone"
+            android:title="@string/incall_headphone_audio_title_head"
+            android:summary="@string/incall_headphone_audio_summary_head"
+            android:entries="@array/incall_headphone_entries"
+            android:entryValues="@array/incall_headphone_entries_values" />
+
+    <com.cyanogenmod.settings.device.IncallAudio
+            android:key="incall_speaker"
+            android:title="@string/incall_speaker_audio_title_head"
+            android:summary="@string/incall_speaker_audio_summary_head"
+            android:entries="@array/incall_speaker_entries"
+            android:entryValues="@array/incall_speaker_entries_values" />
+
+    <com.cyanogenmod.settings.device.IncallAudio
+            android:key="incall_bt"
+            android:title="@string/incall_bt_audio_title_head"
+            android:summary="@string/incall_bt_audio_summary_head"
+            android:entries="@array/incall_bt_entries"
+            android:entryValues="@array/incall_bt_entries_values" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

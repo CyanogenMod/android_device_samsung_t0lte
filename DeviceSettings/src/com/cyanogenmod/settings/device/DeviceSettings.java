@@ -45,6 +45,10 @@ public class DeviceSettings extends FragmentActivity {
     public static final String KEY_TOUCHKEY_LIGHT = "touchkey_light";
     public static final String KEY_TOUCHKEY_TIMEOUT = "touchkey_timeout";
     public static final String KEY_USE_DOCK_AUDIO = "dock_audio";
+    public static final String KEY_INCALL_HEADSET = "incall_headset";
+    public static final String KEY_INCALL_HEADPHONE = "incall_headphone";
+    public static final String KEY_INCALL_SPEAKER = "incall_speaker";
+    public static final String KEY_INCALL_BT = "incall_bt";
 
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
@@ -64,8 +68,8 @@ public class DeviceSettings extends FragmentActivity {
         bar.setDisplayHomeAsUpEnabled(true);
 
         mTabsAdapter = new TabsAdapter(this, mViewPager);
-        mTabsAdapter.addTab(bar.newTab().setText(R.string.category_dock_title),
-                DockFragmentActivity.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText(R.string.category_audio_title),
+                AudioFragmentActivity.class, null);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.category_radio_title),
                 RadioFragmentActivity.class, null);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.category_screen_title),

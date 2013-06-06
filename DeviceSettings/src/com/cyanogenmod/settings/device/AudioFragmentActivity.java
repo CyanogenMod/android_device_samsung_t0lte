@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -32,18 +33,34 @@ import android.util.Log;
 
 import com.cyanogenmod.settings.device.R;
 
-public class DockFragmentActivity extends PreferenceFragment {
+public class AudioFragmentActivity extends PreferenceFragment {
 
     private static final String PREF_ENABLED = "1";
-    private static final String TAG = "GalaxyNote2Settings_Dock";
+    private static final String TAG = "GalaxyNote2Settings_Audio";
+
+    private IncallAudio mIncallHeadset;
+    private IncallAudio mIncallHeadphone;
+    private IncallAudio mIncallSpeaker;
+    private IncallAudio mIncallBt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.dock_preferences);
+        addPreferencesFromResource(R.xml.audio_preferences);
         PreferenceScreen prefSet = getPreferenceScreen();
 
+        mIncallHeadset = (IncallAudio) findPreference(DeviceSettings.KEY_INCALL_HEADSET);
+        mIncallHeadset.setEnabled(mIncallHeadset.isSupported("headset"));
+
+        mIncallHeadphone = (IncallAudio) findPreference(DeviceSettings.KEY_INCALL_HEADPHONE);
+        mIncallHeadphone.setEnabled(mIncallHeadphone.isSupported("headphone"));
+
+        mIncallSpeaker = (IncallAudio) findPreference(DeviceSettings.KEY_INCALL_SPEAKER);
+        mIncallSpeaker.setEnabled(mIncallSpeaker.isSupported("speaker"));
+
+        mIncallBt = (IncallAudio) findPreference(DeviceSettings.KEY_INCALL_BT);
+        mIncallBt.setEnabled(mIncallBt.isSupported("bt"));
     }
 
     @Override
