@@ -25,9 +25,13 @@
 #include <pthread.h>
 #include <stdint.h>
 #include <sys/time.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <stdlib.h>
 #include <expat.h>
 #include <dlfcn.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 #include <cutils/log.h>
 #include <cutils/str_parms.h>
@@ -533,7 +537,7 @@ static void set_incall_device(struct m0_audio_device *adev)
         case AUDIO_DEVICE_OUT_EARPIECE:
             rx_dev_id = DEVICE_HANDSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
-            voice_index = 5;
+            voice_index = get_volume(INCALL_HEADSET);
             break;
         case AUDIO_DEVICE_OUT_SPEAKER:
         case AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET:
@@ -541,13 +545,13 @@ static void set_incall_device(struct m0_audio_device *adev)
         case AUDIO_DEVICE_OUT_AUX_DIGITAL:
             rx_dev_id = DEVICE_SPEAKER_MONO_RX_ACDB_ID;
             tx_dev_id = DEVICE_SPEAKER_TX_ACDB_ID;
-            voice_index = 7;
+            voice_index = get_volume(INCALL_SPEAKER);
             break;
         case AUDIO_DEVICE_OUT_WIRED_HEADSET:
         case AUDIO_DEVICE_OUT_WIRED_HEADPHONE:
             rx_dev_id = DEVICE_HEADSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HEADSET_TX_ACDB_ID;
-            voice_index = 5;
+            voice_index = get_volume(INCALL_HEADPHONE);
             break;
         case AUDIO_DEVICE_OUT_BLUETOOTH_SCO:
         case AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET:
@@ -559,12 +563,12 @@ static void set_incall_device(struct m0_audio_device *adev)
                 rx_dev_id = DEVICE_BT_SCO_RX_ACDB_ID;
                 tx_dev_id = DEVICE_BT_SCO_TX_ACDB_ID;
             }
-            voice_index = 7;
+            voice_index = get_volume(INCALL_BT);
             break;
         default:
             rx_dev_id = DEVICE_HANDSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
-            voice_index = 5;
+            voice_index = get_volume(INCALL_HEADSET);
             break;
     }
 
@@ -3151,11 +3155,58 @@ static int adev_config_parse(struct m0_audio_device *adev)
     return ret;
 }
 
+static int volume_file_check()
+{
+  FILE *f;
+  int i;
+  int default_vol = 5;
+  struct stat st = {0};
+
+  if (stat(AUDIO_DIR, &st) == -1) {
+    ALOGE("Directory %s does not exist, skip creating volume files\n", AUDIO_DIR);
+    return -ENODEV;
+  }
+  
+  for ( i = 0; i < MAX_NUM_VOLUME_FILES; i++ ) {
+    f = fopen(volume_file[i], "r");
+    if(!f){
+      ALOGW("Failed to open %s, attempting to create file\n", volume_file[i]);
+      f = fopen(volume_file[i], "w");
+      if(!f){
+        ALOGE("Failed to create %s\n", volume_file[i]);
+        continue;
+      }else{
+        ALOGI("Successfully created %s\n", volume_file[i]);
+	chmod(f, 0666);
+        fprintf(f, "%d", default_vol);
+      }
+      fclose(f);
+    }
+  }
+  
+  return 0;
+}
+
+int get_volume(char *file)
+{
+  FILE *f;
+  int index = 1;
+  
+  f = fopen(file, "r");
+  if(f) {
+    fscanf(f, "%d", &index);
+    fclose(f);
+  }
+  
+  return index;
+}
+    
+
 static int adev_open(const hw_module_t* module, const char* name,
                      hw_device_t** device)
 {
     struct m0_audio_device *adev;
-    int ret;
+    int ret, volfs;
 
     if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0)
         return -EINVAL;
@@ -3198,6 +3249,8 @@ static int adev_open(const hw_module_t* module, const char* name,
     ret = adev_config_parse(adev);
     if (ret != 0)
         goto err_mixer;
+    
+    volfs = volume_file_check();
 
     /* Set the default route before the PCM stream is opened */
     pthread_mutex_lock(&adev->lock);

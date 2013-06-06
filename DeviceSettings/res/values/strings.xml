@@ -2,10 +2,19 @@
 <resources>
     <string name="app_name">Advanced settings</string>
 
-    <string name="category_dock_title">Dock</string>
+    <string name="category_audio_title">Audio</string>
     <string name="dockaudio_subcat_title">Dock Audio</string>
     <string name="use_dock_audio_title_head">Use Dock USB Audio</string>
     <string name="use_dock_audio_summary_head">Use the passive audio out on the dock</string>
+    <string name="incallaudio_subcat_title">InCall Audio</string>
+    <string name="incall_headset_audio_title_head">Headset</string>
+    <string name="incall_headset_audio_summary_head">Increase/Decrease Headset Voice Index</string>
+    <string name="incall_headphone_audio_title_head">Headphone</string>
+    <string name="incall_headphone_audio_summary_head">Increase/Decrease Headphone Voice Index</string>
+    <string name="incall_speaker_audio_title_head">Speaker</string>
+    <string name="incall_speaker_audio_summary_head">Increase/Decrease Speaker Voice Index</string>
+    <string name="incall_bt_audio_title_head">BT</string>
+    <string name="incall_bt_audio_summary_head">Increase/Decrease BT Voice Index</string>
 
     <string name="category_haptic_title">Haptic</string>
     <string name="vibrator_subcat_title">Vibrator</string>
