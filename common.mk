@@ -17,7 +17,7 @@
 LOCAL_PATH := device/samsung/t0lte
 
 # Overlay
-ifneq ($(filter t0ltecdma i605 l900 r950,$(TARGET_DEVICE)),)
+ifeq ($(TARGET_VOICE_TECH), cdma)
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-cdma
 else
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
