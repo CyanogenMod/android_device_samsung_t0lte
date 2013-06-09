@@ -36,7 +36,7 @@ PRODUCT_PACKAGES += \
 
 # Product specific Packages
 PRODUCT_PACKAGES += \
-    GalaxyNote2Settings
+    DeviceSettings
 
 # NFC
 PRODUCT_PACKAGES += \
