@@ -175,6 +175,10 @@ on post-fs-data
     chmod 0660 /sys/class/sec/sec_touchkey/force_disable
     chown system system /sys/class/sec/sec_touchkey/force_disable
 
+# S-Pen
+    chown system system /sys/class/sec/sec_epen/epen_saving_mode
+    chmod 660 /sys/class/sec/sec_epen/epen_saving_mode
+
 # Permissions for LCD
     chown system radio /sys/class/lcd/panel/lcd_power
     chown system radio /sys/class/lcd/panel/lcd_type
