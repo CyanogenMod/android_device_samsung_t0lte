@@ -116,6 +116,9 @@ on post-fs-data
     chmod 0775 /data/misc/radio
     mkdir /efs/imei 0775 radio system
 
+    mkdir /data/local/audio 0775 media audio
+    chown media audio /data/local/audio
+
 # HDCP 2.x
     mkdir /data/system/hdcp2 0775 system system
 
