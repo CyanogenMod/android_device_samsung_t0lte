@@ -66,6 +66,15 @@
 /* sampling rate when using VX port for wide band */
 #define VX_WB_SAMPLING_RATE 16000
 
+#define MAX_NUM_VOLUME_FILES 4
+#define AUDIO_DIR "/data/local/audio"
+
+/* in-call files */
+#define INCALL_HEADSET "/data/local/audio/incall_headset"
+#define INCALL_HEADPHONE "/data/local/audio/incall_headphone"
+#define INCALL_SPEAKER "/data/local/audio/incall_speaker"
+#define INCALL_BT "/data/local/audio/incall_bt"
+
 /* product-specific defines */
 #define PRODUCT_DEVICE_PROPERTY "ro.product.device"
 #define PRODUCT_NAME_PROPERTY   "ro.product.name"
@@ -104,6 +113,13 @@ enum tty_modes {
     TTY_MODE_VCO,
     TTY_MODE_HCO,
     TTY_MODE_FULL
+};
+
+char *volume_file[MAX_NUM_VOLUME_FILES] = {
+    INCALL_HEADSET,
+    INCALL_HEADPHONE,
+    INCALL_SPEAKER,
+    INCALL_BT
 };
 
 /* ACDB Device ID macros */
