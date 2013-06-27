@@ -21,4 +21,7 @@
     <bool name="has_incall_audio_tuning">true</bool>
     <bool name="has_output_audio_tuning">true</bool>
 
+    <!-- HSPA -->
+    <bool name="has_hspa">false</bool>
+
 </resources>
