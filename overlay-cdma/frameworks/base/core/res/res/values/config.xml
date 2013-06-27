@@ -61,7 +61,7 @@
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
         <item>"usb0"</item>
-		<item>"rndis0"</item>
+        <item>"rndis0"</item>
     </string-array>
 	
     <integer-array name="config_data_usage_network_types">
@@ -70,17 +70,17 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
-    </integer-array>
+      </integer-array>
 
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
     <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
-    <integer-array translatable="false" name="config_tether_upstream_types">
+     <integer-array translatable="false" name="config_tether_upstream_types">
         <item>0</item>
         <item>1</item>
         <item>5</item>
         <item>7</item>
-    </integer-array>
+      </integer-array>
     
     <!-- If the DUN connection for this CDMA device supports more than just DUN -->
     <!-- traffic you should list them here. -->
