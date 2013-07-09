@@ -8,7 +8,6 @@ system/bin/qmiproxy
 system/bin/qmuxd
 system/bin/rild
 system/bin/sec-ril
-system/bin/sensorhubservice
 system/bin/smdexe
 system/etc/Diag.cfg
 system/etc/Diag_zero.cfg
@@ -38,9 +37,7 @@ system/lib/libril-qc-qmi-1.so
 system/lib/libril-qcril-hook-oem.so
 system/lib/libsecnativefeature.so
 system/lib/libsecril-client.so
-system/lib/libsensorhubservice.so
 system/lib/hw/vendor-camera.exynos4.so
-system/lib/hw/sensorhubs.smdk4x12.so
 system/lib/hw/sensors.smdk4x12.so
 system/usr/idc/sec_e-pen.idc
 system/usr/keylayout/sec_e-pen.kl
