@@ -594,9 +594,3 @@ service dmb /system/bin/dmbserver
     class main
     user system
     group radio inet misc audio camera graphics net_bt net_bt_admin sdcard_rw
-
-# sensorhub
-service sensorhubservice /system/bin/sensorhubservice
-    class main
-    user system
-    group input
