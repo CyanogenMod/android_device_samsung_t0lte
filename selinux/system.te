@@ -1,0 +1,4 @@
+allow system diagnostic_device:chr_file rw_file_perms;
+
+allow system sysfs:file { read open write };
+allow system self:capability { sys_module };
