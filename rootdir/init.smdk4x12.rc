@@ -38,17 +38,8 @@ on init
     export VIBE_PIPE_PATH /dev/pipes
     mkdir /dev/pipes 0771 shell shell
 
-on fs
-    mount_all /fstab.smdk4x12
-
-    setprop ro.crypto.fuse_sdcard true
-    
-    chown radio system /efs
-    chmod 0771 /efs
-
 #MDM requirement
     mkdir /firmware 0771 system system
-    mount vfat /dev/block/mmcblk0p10 /firmware ro shortname=lower fmask=0133,dmask=0022
     chown system system /tombstones
     chmod 0775 /tombstones
     mkdir /tombstones/modem 0775 system system
@@ -59,6 +50,14 @@ on fs
     mkdir /tombstones/qcks 771 system system
     rmdir /tombstones/efs
     mkdir /tombstones/efs 771 system system
+
+on fs
+    mount_all /fstab.smdk4x12
+
+    setprop ro.crypto.fuse_sdcard true
+    
+    chown radio system /efs
+    chmod 0771 /efs
 
     chown system radio /dev/block/platform/dw_mmc/by-name
     chmod 0775 /dev/block/platform/dw_mmc/by-name    
@@ -505,7 +504,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
@@ -517,7 +516,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
