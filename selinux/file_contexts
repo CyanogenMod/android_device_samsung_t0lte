@@ -1,0 +1,32 @@
+# GFX
+/dev/mali                               u:object_r:mali_device:s0
+/dev/ump                                u:object_r:mali_device:s0
+/dev/fimg2d                             u:object_r:mali_device:s0
+
+# NFC
+/dev/pn544                              u:object_r:nfc_device:s0
+
+# RIL
+/dev/hsicctl*                           u:object_r:radio_device:s0
+/efs/h2k.dat                            u:object_r:radio_efs_file:s0
+/efs/imei/mps_code.dat                  u:object_r:radio_efs_file:s0
+
+# GPS
+/dev/ttySAC1                            u:object_r:gps_device:s0
+
+# Sensors
+/dev/akm8975                            u:object_r:sensors_device:s0
+
+# for wpa_supp
+/dev/rfkill                             u:object_r:rfkill_device:s0
+
+# Firmwares
+/system/vendor/firmware/mfc_fw.bin      u:object_r:firmware_mfc:s0
+/system/vendor/firmware/SlimISP_*       u:object_r:firmware_camera:s0
+/data/cfw/SlimISP_*                     u:object_r:firmware_camera:s0
+
+# Vibrator
+/dev/tspdrv								u:object_r:input_device:s0
+
+#Wifi
+/efs/wifi/.mac.info				        u:object_r:radio_data_file:s0

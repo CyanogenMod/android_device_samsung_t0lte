@@ -27,3 +27,16 @@ BOARD_GPS_SET_PRIVACY := true
 # inherit from the proprietary version
 -include vendor/samsung/t0lte/BoardConfigVendor.mk
 
+# Selinux
+ifeq ($(HAVE_SELINUX),true)
+
+BOARD_SEPOLICY_DIRS := \
+	device/samsung/t0lte/selinux
+
+BOARD_SEPOLICY_UNION := \
+	file_contexts \
+	file.te \
+	device.te \
+	domain.te
+
+endif
