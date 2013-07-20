@@ -1,0 +1,3 @@
+allow mediaserver { firmware_camera }:file r_file_perms;
+allow mediaserver volume_data_file:file create_file_perms;
+allow mediaserver volume_data_file:dir create_dir_perms;

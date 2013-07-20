@@ -67,17 +67,17 @@
 #define VX_WB_SAMPLING_RATE 16000
 
 #define MAX_NUM_VOLUME_FILES 6
-#define AUDIO_DIR "/data/local/audio"
+#define AUDIO_DIR "/data/audio"
 
 /* in-call files */
-#define INCALL_EARPIECE "/data/local/audio/incall_earpiece"
-#define INCALL_HEADPHONE "/data/local/audio/incall_headphone"
-#define INCALL_SPEAKER "/data/local/audio/incall_speaker"
-#define INCALL_BT "/data/local/audio/incall_bt"
+#define INCALL_EARPIECE "/data/audio/incall_earpiece"
+#define INCALL_HEADPHONE "/data/audio/incall_headphone"
+#define INCALL_SPEAKER "/data/audio/incall_speaker"
+#define INCALL_BT "/data/audio/incall_bt"
 
 /* out stream files */
-#define OUT_HEADPHONE "/data/local/audio/out_headphone"
-#define OUT_SPEAKER "/data/local/audio/out_speaker"
+#define OUT_HEADPHONE "/data/audio/out_headphone"
+#define OUT_SPEAKER "/data/audio/out_speaker"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 

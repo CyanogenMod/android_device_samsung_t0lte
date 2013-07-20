@@ -1,0 +1,16 @@
+allow init wpa_socket:unix_dgram_socket { bind create };
+
+allow init_shell radio_device:chr_file { read write ioctl open };
+allow init_shell efs_block_device:dir { getattr search write open };
+allow init_shell block_device:dir { getattr search write open };
+allow init_shell efs_block_device:blk_file rw_file_perms;
+allow init_shell kickstart_data_file:dir search;
+allow init_shell kickstart_data_file:file create_file_perms;
+allow init_shell radio_efs_file:file rw_file_perms;
+allow init_shell self:capability dac_override;
+allow init_shell system_data_file:dir create_dir_perms;
+allow init_shell system_data_file:file create_file_perms;
+allow init_shell self:netlink_route_socket { create bind read write nlmsg_read nlmsg_write setopt getattr };
+allow init_shell init:packet_socket { write bind read create };
+allow init_shell init:udp_socket { write read };
+allow init_shell init:fifo_file r_file_perms;
