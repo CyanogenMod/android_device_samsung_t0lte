@@ -1,0 +1,7 @@
+## /dev/mali, /dev/ump
+allow domain mali_device:chr_file rw_file_perms;
+
+## Firmwares
+allow ueventd { firmware_mfc }:file r_file_perms;
+allow ueventd { firmware_camera }:dir search;
+allow mediaserver { firmware_camera }:file r_file_perms;

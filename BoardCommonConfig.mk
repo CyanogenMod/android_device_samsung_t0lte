@@ -40,3 +40,25 @@ endif
 # assert
 TARGET_OTA_ASSERT_DEVICE := t0lte,t0ltexx,GT-N7105,t0ltedv,GT-N7105T,t0lteatt,SGH-I317,t0ltetmo,SGH-T889,t0ltecan,t0ltevl,SGH-I317M
 
+# Selinux
+ifeq ($(HAVE_SELINUX),true)
+
+BOARD_SEPOLICY_DIRS := \
+    device/samsung/t0lte/selinux
+
+BOARD_SEPOLICY_UNION := \
+    file_contexts \
+    te_macros \
+    dhcp.te \
+    file.te \
+    init.te \
+    system.te \
+    device.te \
+    domain.te \
+    kickstart.te \
+    netmgrd.te \
+    qmux.te \
+    rild.te \
+    wpa_supplicant.te
+
+endif
