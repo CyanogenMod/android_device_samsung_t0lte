@@ -1,0 +1,4 @@
+type mali_device, dev_type, mlstrustedobject;
+type rfkill_device, dev_type;
+type diagnostic_device, dev_type;
+type efs_block_device, dev_type;

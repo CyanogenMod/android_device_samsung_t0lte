@@ -48,7 +48,7 @@ on fs
 
 #MDM requirement
     mkdir /firmware 0771 system system
-    mount vfat /dev/block/mmcblk0p10 /firmware ro shortname=lower fmask=0133,dmask=0022
+    mount vfat /dev/block/mmcblk0p10 /firmware ro shortname=lower fmask=0133,dmask=0022 context=u:object_r:radio_efs_file:s0
     chown system system /tombstones
     chmod 0775 /tombstones
     mkdir /tombstones/modem 0775 system system
