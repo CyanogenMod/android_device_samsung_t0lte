@@ -34,10 +34,6 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_PACKAGES += \
     tiny_hw
 
-# Product specific Packages
-PRODUCT_PACKAGES += \
-    DeviceSettings
-
 # NFC
 PRODUCT_PACKAGES += \
     nfc.exynos4 \
