@@ -1,0 +1,69 @@
+# GFX
+/dev/mali                               u:object_r:mali_device:s0
+/dev/ump                                u:object_r:mali_device:s0
+/dev/fimg2d                             u:object_r:mali_device:s0
+
+# NFC
+/dev/pn544                              u:object_r:nfc_device:s0
+
+# RIL
+/dev/mdm                                u:object_r:radio_device:s0
+/dev/hsicctl[0-3]*                      u:object_r:radio_device:s0
+/dev/ttyUSB0                            u:object_r:radio_device:s0
+/dev/diag                               u:object_r:diagnostic_device:s0
+
+# GPS
+/dev/ttySAC1                            u:object_r:gps_device:s0
+
+# Bluetooth
+/dev/ttySAC0                            u:object_r:hci_attach_dev:s0
+/efs/bluetooth(/.*)?                	u:object_r:bluetooth_data_file:s0
+
+# Sensors
+/dev/akm8963                            u:object_r:sensors_device:s0
+/efs/gyro_cal_data                      u:object_r:sensors_data_file:s0
+
+# for wpa_supp
+/dev/rfkill                             u:object_r:rfkill_device:s0
+
+# Firmwares
+/system/vendor/firmware(/.*)?           u:object_r:firmware_camera:s0
+/system/vendor/firmware/mfc_fw.bin      u:object_r:firmware_mfc:s0
+/data/cfw(/.*)?                         u:object_r:firmware_camera:s0
+/tombstones/qcks(/.*)?                  u:object_r:kickstart_data_file:s0
+/tombstones(/.*)?	                    u:object_r:tombstone_data_file:s0
+
+# Vibrator
+/dev/tspdrv                             u:object_r:input_device:s0
+
+#Wifi
+/efs/wifi/.mac.info                     u:object_r:wifi_data_file:s0
+
+#Sec-ril 
+/efs/FactoryApp/keystr                  u:object_r:efs_file:s0
+/efs/FactoryApp/factorymode             u:object_r:efs_file:s0
+/efs/FactoryApp/serial_no               u:object_r:efs_file:s0
+/data/misc/radio/ramdumpmode.txt        u:object_r:radio_data_file:s0
+/data/misc/radio/dlnk                   u:object_r:radio_data_file:s0
+
+#Binaries
+/system/bin/qmuxd                u:object_r:qmux_exec:s0
+/system/bin/netmgrd              u:object_r:netmgrd_exec:s0
+/system/bin/efsks                u:object_r:kickstart_exec:s0
+/system/bin/ks                   u:object_r:kickstart_exec:s0
+/system/bin/qcks                 u:object_r:kickstart_exec:s0
+/system/bin/sec-ril              u:object_r:secril-daemon_exec:s0
+
+# Sockets
+/dev/socket/qmux_audio(/.*)?     u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_bluetooth(/.*)? u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_gps(/.*)?       u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_radio(/.*)?     u:object_r:qmuxd_socket:s0
+
+# Block devices
+/dev/block/mmcblk0p[3-6]*       u:object_r:efs_block_device:s0
+/dev/block/mmcblk0p10           u:object_r:efs_block_device:s0
+/dev/block/mmcblk0p11           u:object_r:efs_block_device:s0
+
+# Audio related
+/data/local/audio(/.*)?         u:object_r:volume_data_file:s0

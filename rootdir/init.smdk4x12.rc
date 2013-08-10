@@ -38,17 +38,8 @@ on init
     export VIBE_PIPE_PATH /dev/pipes
     mkdir /dev/pipes 0771 shell shell
 
-on fs
-    mount_all /fstab.smdk4x12
-
-    setprop ro.crypto.fuse_sdcard true
-    
-    chown radio system /efs
-    chmod 0771 /efs
-
 #MDM requirement
     mkdir /firmware 0771 system system
-    mount vfat /dev/block/mmcblk0p10 /firmware ro shortname=lower fmask=0133,dmask=0022
     chown system system /tombstones
     chmod 0775 /tombstones
     mkdir /tombstones/modem 0775 system system
@@ -59,6 +50,14 @@ on fs
     mkdir /tombstones/qcks 771 system system
     rmdir /tombstones/efs
     mkdir /tombstones/efs 771 system system
+
+on fs
+    mount_all /fstab.smdk4x12
+
+    setprop ro.crypto.fuse_sdcard true
+
+    chown radio system /efs
+    chmod 0771 /efs
 
     chown system radio /dev/block/platform/dw_mmc/by-name
     chmod 0775 /dev/block/platform/dw_mmc/by-name    
@@ -87,6 +86,10 @@ on post-fs-data
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    restorecon /efs/FactoryApp/keystr
+    restorecon /efs/FactoryApp/factorymode
+    restorecon /efs/FactoryApp/serial_no
 
 # for AT distributor
     chown system radio /sys/module/cpuidle_exynos4/parameters/enable_mask
@@ -156,6 +159,8 @@ on post-fs-data
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    restorecon /sys/class/rfkill/rfkill0/state
+    restorecon /sys/class/rfkill/rfkill0/type
 
 # NFC
     setprop ro.nfc.port "I2C"
@@ -504,7 +509,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
@@ -516,7 +521,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
@@ -565,11 +570,13 @@ service SMD-daemon /system/bin/smdexe
 service qc_kickstart /system/bin/qcks s
     class core
     user root
+    seclabel u:r:kickstart:s0
     group radio cache inet misc audio sdcard_rw log
 
 service secril-daemon /system/bin/sec-ril
     class main
     user root
+    seclabel u:r:secril-daemon:s0
     group radio cache inet misc audio sdcard_rw qcom_diag log
 
 #For EncryptionMode - remove disabled, Modify class main
@@ -581,6 +588,7 @@ service qmiproxy /system/bin/qmiproxy
 service qmuxd /system/bin/qmuxd
     class main
     user root
+    seclabel u:r:qmux:s0
     group radio log audio bluetooth gps log
 
 #start GNSS/Sensor interface daemon
