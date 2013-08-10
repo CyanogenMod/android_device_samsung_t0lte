@@ -1,0 +1,130 @@
+import init.bt.rc
+
+on init
+    # Vibetonz
+    export VIBE_PIPE_PATH /dev/pipes
+    mkdir /dev/pipes 0771 shell shell
+
+    # MDM requirement
+    mkdir /firmware 0771 system system
+    chown system system /tombstones
+    chmod 0775 /tombstones
+    mkdir /tombstones/modem 0775 system system
+    mkdir /tombstones/lpass 0775 system system
+    mkdir /tombstones/wcnss 0775 system system
+    mkdir /tombstones/dsps 0775 system system
+    rmdir /tombstones/qcks
+    mkdir /tombstones/qcks 771 system system
+    rmdir /tombstones/efs
+    mkdir /tombstones/efs 771 system system
+
+on post-fs-data
+    chown system radio /dev/block/platform/dw_mmc/by-name
+    chmod 0775 /dev/block/platform/dw_mmc/by-name
+
+    #QCRIL
+    #Create QMUX deamon socket area
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    chmod 2770 /dev/socket/qmux_radio
+    mkdir /dev/socket/qmux_audio 0770 media audio
+    chmod 2770 /dev/socket/qmux_audio
+    mkdir /dev/socket/qmux_gps 0770 gps gps
+    chmod 2770 /dev/socket/qmux_gps
+
+    # Allow QMUX daemon to assign port open wait time
+    chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
+
+    # To prevent out of order acknowledgements from making
+    # connection tracking to treat them as not belonging to
+    # the connection they belong to.
+    # Otherwise, a weird issue happens in which some long
+    # connections on high-throughput links get dropped when
+    # an ack packet comes out of order
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    restorecon /efs/FactoryApp/keystr
+    restorecon /efs/FactoryApp/factorymode
+    restorecon /efs/FactoryApp/serial_no
+
+    # for AT distributor
+    chown system radio /sys/module/cpuidle_exynos4/parameters/enable_mask
+    chmod 0664 /sys/module/cpuidle_exynos4/parameters/enable_mask
+
+    # Waketime fot fast dormancy
+    chown system radio /sys/devices/platform/mdm_hsic_pm0/waketime
+    chmod 0660 /sys/devices/platform/mdm_hsic_pm0/waketime
+
+    mkdir /data/local/audio 0775 media audio
+    chown media audio /data/local/audio
+
+    chown radio system /sys/devices/platform/samsung-pd.5/s3c-fimc.2/range_mode
+    chmod 0660 /sys/devices/platform/samsung-pd.5/s3c-fimc.2/range_mode
+
+    # make param block device link for SysScope
+    symlink /dev/block/mmcblk0p7 /dev/block/param
+
+    # SensorHub
+    chown system radio /sys/class/sensors/ssp_sensor/enable
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_rev
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_name
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_test
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_reset
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_update
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_sleep_test
+    chown system radio /sys/class/sensors/ssp_sensor/ori_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/mag_poll_delay
+
+on boot
+
+on property:sys.boot_completed=1
+    write /sys/block/mmcblk0/queue/scheduler cfq
+    write /sys/power/cpufreq_min_limit -1
+
+# AT Distributor for factory test
+service at_distributor /system/bin/at_distributor
+    class main
+    user root
+    group radio log
+
+# diag app for cp uart
+service diag_uart_log /system/bin/diag_uart_log
+    class main
+    user root
+    group radio
+
+service netmgrd /system/bin/netmgrd
+    class late_start
+
+service SMD-daemon /system/bin/smdexe
+    class main
+    user root
+    group system radio inet net_raw
+
+service qc_kickstart /system/bin/qcks s
+    class core
+    user root
+    seclabel u:r:kickstart:s0
+    group radio cache inet misc audio sdcard_rw log
+
+service secril-daemon /system/bin/sec-ril
+    class main
+    user root
+    seclabel u:r:secril-daemon:s0
+    group radio cache inet misc audio sdcard_rw qcom_diag log
+
+#For EncryptionMode - remove disabled, Modify class main
+service qmiproxy /system/bin/qmiproxy
+    class main
+    user radio
+    group radio gps
+
+service qmuxd /system/bin/qmuxd
+    class main
+    user system
+    seclabel u:r:qmux:s0
+    group radio log audio bluetooth gps log
+
+service gsiff_daemon /system/bin/gsiff_daemon
+    class late_start
+    user system
+    group qcom_oncrpc gps
