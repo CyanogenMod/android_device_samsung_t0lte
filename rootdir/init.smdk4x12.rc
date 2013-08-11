@@ -147,7 +147,9 @@ on post-fs-data
     chown system radio /sys/class/camera/flash/rear_flash
     chown radio system /sys/devices/platform/samsung-pd.5/s3c-fimc.2/range_mode
     chmod 0660 /sys/devices/platform/samsung-pd.5/s3c-fimc.2/range_mode
+    
     write /data/ISP_CV 1
+    restorecon /data/ISP_CV
 
     symlink /dev/block/mmcblk0p7 /dev/block/param
 
