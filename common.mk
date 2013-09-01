@@ -34,6 +34,10 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_PACKAGES += \
     tiny_hw
 
+# Camera
+PRODUCT_PACKAGES += \
+    camera.smdk4x12
+
 # NFC
 PRODUCT_PACKAGES += \
     nfc.exynos4 \
