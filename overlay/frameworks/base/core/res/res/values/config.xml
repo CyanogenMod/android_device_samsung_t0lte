@@ -42,6 +42,9 @@
         <item>"mobile_dun,4,0,3,60000,true"</item>
         <item>"mobile_hipri,5,0,3,60000,true"</item>
         <item>"mobile_bluetooth,7,7,1,-1,true"</item>
+        <item>"mobile_fota,10,0,2,60000,true"</item>
+        <item>"mobile_ims,11,0,2,-1,true"</item>
+        <item>"mobile_cbs,12,0,2,60000,true"</item>
         <item>"wifi_p2p,13,1,0,-1,true"</item>
     </string-array>
 
@@ -57,6 +60,7 @@
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
+        <item>"usb0"</item>
         <item>"rndis0"</item>
     </string-array>
 
@@ -70,8 +74,20 @@
         <item>7</item>
     </integer-array>
 
+    <!-- If the DUN connection for this CDMA device supports more than just DUN -->
+    <!-- traffic you should list them here. -->
+    <!-- If this device is not CDMA this is ignored.  If this list is empty on -->
+    <!-- a DUN-requireing CDMA device, the DUN APN will support -->
+    <!-- just DUN. -->
+    <string-array translatable="false" name="config_cdma_dun_supported_types">
+        <item>"default"</item>
+        <item>"dun"</item>
+        <item>"mms"</item>
+        <item>"supl"</item>
+    </string-array>
+
     <!-- The default iface on which to monitor data use -->
-    <string name="config_datause_iface">pdp0</string>
+    <string name="config_datause_iface">rmnet0</string>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
