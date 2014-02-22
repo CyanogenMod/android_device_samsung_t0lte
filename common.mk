@@ -17,11 +17,7 @@
 LOCAL_PATH := device/samsung/t0lte
 
 # Overlay
-ifeq ($(TARGET_VOICE_TECH), cdma)
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-cdma
-else
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-endif
 
 # This device is xhdpi.  However the platform doesn't
 # currently contain all of the bitmaps at xhdpi density so
@@ -53,8 +49,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     packages/apps/Nfc/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
