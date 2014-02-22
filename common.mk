@@ -17,11 +17,7 @@
 LOCAL_PATH := device/samsung/t0lte
 
 # Overlay
-ifeq ($(TARGET_VOICE_TECH), cdma)
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-cdma
-else
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-endif
 
 # This device is xhdpi.  However the platform doesn't
 # currently contain all of the bitmaps at xhdpi density so
