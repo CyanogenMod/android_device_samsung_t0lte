@@ -27,3 +27,9 @@ BOARD_GPS_SET_PRIVACY := true
 # inherit from the proprietary version
 -include vendor/samsung/t0lte/BoardConfigVendor.mk
 
+# Vendor Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := device/samsung/t0lte/init/init_t0lte.c
+
+TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/t0lte/releasetools

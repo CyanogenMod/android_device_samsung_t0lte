@@ -42,7 +42,15 @@ TARGET_RECOVERY_FSTAB := device/samsung/t0lte/rootdir/fstab.smdk4x12
 RECOVERY_FSTAB_VERSION := 2
 
 # assert
-TARGET_OTA_ASSERT_DEVICE := t0lte,t0ltexx,GT-N7105,t0ltedv,GT-N7105T,t0lteatt,SGH-I317,t0ltetmo,SGH-T889,t0ltecan,t0ltevl,SGH-I317M
+TARGET_OTA_ASSERT_DEVICE := \
+    t0lte,t0ltecdma \
+    t0ltexx,GT-N7105, \
+    t0ltedv,GT-N7105T, \
+    t0lteatt,SGH-I317, \
+    t0ltetmo,SGH-T889, \
+    t0ltecan,t0ltevl,SGH-I317M \
+    t0ltevzw,i605,SCH-I605 \
+    t0ltespr,l900,SPH-L900
 
 # Selinux
 BOARD_SEPOLICY_DIRS += \
