@@ -4,7 +4,6 @@ type firmware_mfc, file_type;
 type firmware_camera, file_type;
 
 type qmuxd_socket, file_type;
-type camera_data_file, file_type, data_file_type;
 type kickstart_data_file, file_type, data_file_type;
 type sensors_data_file, file_type, data_file_type;
 type volume_data_file, file_type, data_file_type;

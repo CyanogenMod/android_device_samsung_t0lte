@@ -2,7 +2,6 @@
 qmux_socket(system)
 
 allow system diagnostic_device:chr_file rw_file_perms;
-#allow system uinput_device:chr_file { read ioctl write open };
 allow system sensors_device:chr_file { read open };
 allow system sensors_data_file:file r_file_perms;
 allow system wpa_socket:unix_dgram_socket sendto;
