@@ -174,7 +174,7 @@ int SensorBase::sspEnable(const char* sensorname, int sensorvalue, int en)
 
 int SensorBase::sspWrite(int sensorvalue)
 {
-    char buf[10];
+    char buf[12];
     int fd, ret, err;
 
     sprintf(buf, "%d", sensorvalue);
