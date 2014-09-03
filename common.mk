@@ -38,6 +38,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.smdk4x12
 
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.smdk4x12
+
 # NFC
 PRODUCT_PACKAGES += \
     nfc.exynos4 \
@@ -65,8 +69,6 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     Stk \
     SamsungServiceMode
-
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
