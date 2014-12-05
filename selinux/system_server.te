@@ -1,0 +1,5 @@
+allow system_server device:chr_file { ioctl };
+allow system_server uhid_device:file { read write open ioctl };
+allow system_server uhid_device:chr_file { read write open ioctl };
+allow system_server efs_file:dir { search };
+allow system_server efs_file:file r_file_perms;
