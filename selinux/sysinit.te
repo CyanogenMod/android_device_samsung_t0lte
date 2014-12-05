@@ -1,0 +1,2 @@
+allow sysinit mmc_block_device:file read;
+allow sysinit firmware_camera:dir { read search open getattr };
