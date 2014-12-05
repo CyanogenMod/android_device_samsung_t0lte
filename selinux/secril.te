@@ -23,3 +23,11 @@ allow secril-daemon app_data_file:file rw_file_perms;
 allow secril-daemon app_data_file:dir search;
 allow secril-daemon zygote_exec:file rx_file_perms;
 allow secril-daemon ashmem_device:chr_file x_file_perms;
+
+allow secril-daemon secril-daemon:process { execmem };
+allow secril-daemon unlabeled:dir { search };
+allow secril-daemon radio_prop:property_service { set };
+allow secril-daemon sysfs_wake_lock:file { read write open };
+allow secril-daemon unlabeled:file { read open getattr setattr };
+#allow secril-daemon system_file:file { entrypoint };
+allow secril-daemon radio_data_file:dir { search };
