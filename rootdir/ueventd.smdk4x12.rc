@@ -86,7 +86,7 @@
 #CPRM
 /dev/block/mmcblk1	      0660   root	    system
 /dev/ttyUSB0              0666   system     system
-/dev/ttyUSB1              0666   system     system
+/dev/ttyUSB1              0666   system     radio
 /dev/ttyUSB2              0666   system     system
 /dev/hsic*                0660   system     radio
 /dev/usb/lp*              0660   system     usb
