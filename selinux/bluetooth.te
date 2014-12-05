@@ -1,0 +1,2 @@
+allow bluetooth smd_device:chr_file { read write ioctl open };
+allow bluetooth sysfs:file { write };
