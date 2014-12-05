@@ -3,6 +3,8 @@
 /dev/ump                                u:object_r:mali_device:s0
 /dev/fimg2d                             u:object_r:mali_device:s0
 
+/dev/s3c-mfc							u:object_r:mfc_device:s0
+
 # RIL
 /dev/mdm                                u:object_r:radio_device:s0
 /dev/hsicctl[0-3]*                      u:object_r:radio_device:s0
@@ -49,8 +51,7 @@
 /data/misc/radio/dlnk                   u:object_r:radio_data_file:s0
 
 # Binaries
-/system/bin/qmuxd                u:object_r:qmux_exec:s0
-/system/bin/netmgrd              u:object_r:netmgrd_exec:s0
+/system/bin/qmuxd                u:object_r:qmuxd_exec:s0
 /system/bin/efsks                u:object_r:kickstart_exec:s0
 /system/bin/ks                   u:object_r:kickstart_exec:s0
 /system/bin/qcks                 u:object_r:kickstart_exec:s0
@@ -63,9 +64,7 @@
 /dev/socket/qmux_radio(/.*)?     u:object_r:qmuxd_socket:s0
 
 # Block devices
-/dev/block/mmcblk0p[3-6]*       u:object_r:efs_block_device:s0
-/dev/block/mmcblk0p10           u:object_r:efs_block_device:s0
-/dev/block/mmcblk0p11           u:object_r:efs_block_device:s0
+/dev/block/mmcblk0(.*)       u:object_r:mmc_block_device:s0
 
 # Audio related
 /data/local/audio(/.*)?         u:object_r:volume_data_file:s0
