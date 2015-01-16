@@ -40,4 +40,8 @@
 
     <!-- Display carrier settings -->
     <bool name="config_carrier_settings_enable">false</bool>
+
+    <!-- Show APN Settings for some CDMA carriers -->
+    <bool name="config_show_apn_setting_cdma">true</bool>
+
 </resources>
