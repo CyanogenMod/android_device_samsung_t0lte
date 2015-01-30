@@ -37,8 +37,15 @@
 /tombstones(/.*)?                       u:object_r:tombstone_data_file:s0
 /tombstones/qcks(/.*)?                  u:object_r:kickstart_data_file:s0
 
+# MDNIE
+/sys/class/mdnie/mdnie/scenario         u:object_r:mdnie_sysfs:s0
+/sys/class/mdnie/mdnie/mode             u:object_r:mdnie_sysfs:s0
+/sys/class/mdnie/mdnie/negative         u:object_r:mdnie_sysfs:s0
+/sys/class/lcd/panel/power_reduce       u:object_r:mdnie_sysfs:s0
+
 # Vibrator
 /dev/tspdrv                             u:object_r:input_device:s0
+/sys/vibrator/pwm_val                   u:object_r:vib_sysfs:s0
 
 # Wifi
 /efs/wifi/.mac.info                     u:object_r:wifi_data_file:s0
