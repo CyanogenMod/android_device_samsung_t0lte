@@ -1,4 +1,4 @@
 allow sysinit mmc_block_device:file read;
 allow sysinit firmware_camera:dir { read search open getattr write remove_name add_name };
-allow sysinit firmware_camera:file { read open getattr setattr create unlink };
+allow sysinit firmware_camera:file { read open write getattr setattr create unlink };
 allow sysinit sysinit:capability { dac_override chown fowner fsetid };
