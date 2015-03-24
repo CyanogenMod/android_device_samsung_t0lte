@@ -30,6 +30,12 @@ endif
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+# Init files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.smdk4x12.rc:root/ueventd.smdk4x12.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.smdk4x12.rc:recovery/root/ueventd.smdk4x12.rc
+
 # Audio
 PRODUCT_PACKAGES += \
     tiny_hw

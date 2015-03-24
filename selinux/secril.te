@@ -32,4 +32,7 @@ allow secril-daemon unlabeled:file { read open getattr setattr };
 #allow secril-daemon system_file:file { entrypoint };
 allow secril-daemon radio_data_file:dir { search write add_name read open remove_name };
 allow secril-daemon efs_file:dir { search };
+allow secril-daemon rild_exec:file { entrypoint read };
+allow secril-daemon qmuxd_socket:dir { write add_name remove_name search };
+allow secril-daemon qmuxd_socket:sock_file { create setattr unlink };
 
