@@ -5,7 +5,26 @@ on init
     export VIBE_PIPE_PATH /dev/pipes
     mkdir /dev/pipes 0771 shell shell
 
-    # MDM requirement
+on post-fs-data
+ #MDM requirement
+    mkdir /data/cp_log
+    chmod 0775 /data/cp_log
+    chown system radio /data/cp_log
+
+    mkdir /dev/block/modem
+    symlink /dev/block/platform/dw_mmc/by-name/m9kefs1 /dev/block/modem/m9kefs1
+    symlink /dev/block/platform/dw_mmc/by-name/m9kefs2 /dev/block/modem/m9kefs2
+    symlink /dev/block/platform/dw_mmc/by-name/m9kefs3 /dev/block/modem/m9kefs3
+    symlink /dev/block/platform/dw_mmc/by-name/ /dev/block/modem/dump_path
+    chown system radio /dev/block/modem/m9kefs1
+    chmod 0775 /dev/block/modem/m9kefs1
+    chown system radio /dev/block/modem/m9kefs2
+    chmod 0775 /dev/block/modem/m9kefs2
+    chown system radio /dev/block/modem/m9kefs3
+    chmod 0775 /dev/block/modem/m9kefs3
+    chown system radio /dev/block/modem/dump_path
+    chmod 0775 /dev/block/modem/dump_path
+
     mkdir /firmware 0771 system system
     chown system system /tombstones
     chmod 0775 /tombstones
@@ -18,14 +37,13 @@ on init
     rmdir /tombstones/efs
     mkdir /tombstones/efs 771 system system
 
-on post-fs-data
     chown system radio /dev/block/platform/dw_mmc/by-name
     chmod 0775 /dev/block/platform/dw_mmc/by-name
 
     # QCRIL
     # Create QMUX deamon socket area
-    mkdir /dev/socket/qmux_radio 0770 radio radio
-    chmod 2770 /dev/socket/qmux_radio
+    mkdir /dev/socket/qmux_radio 0777 radio radio
+    chmod 2777 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
     chmod 2770 /dev/socket/qmux_audio
     mkdir /dev/socket/qmux_gps 0770 gps gps
@@ -33,6 +51,7 @@ on post-fs-data
 
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
+    chmod 0666 /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -83,6 +102,19 @@ on post-fs-data
     chown system radio /sys/class/sensors/ssp_sensor/ori_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/mag_poll_delay
 
+    #Create directories for gpsone_daemon services
+    mkdir /data/misc/gpsone_d 0770 system gps
+
+    #Create directories for QuIPS
+    mkdir /data/misc/quipc 0770 system gps
+
+    #Create directories for Location services
+    mkdir /data/misc/location 0770 gps gps
+    mkdir /data/misc/location/mq 0770 gps gps
+    mkdir /data/misc/location/xtwifi 0770 gps gps
+
+    chmod 0755 /proc/cmdline
+
 on boot
 
 on property:sys.boot_completed=1
@@ -91,7 +123,7 @@ on property:sys.boot_completed=1
 
 # AT Distributor for factory test
 service at_distributor /system/bin/at_distributor
-    class main
+    class late_start
     user root
     group radio log
 
@@ -100,9 +132,6 @@ service diag_uart_log /system/bin/diag_uart_log
     class main
     user root
     group radio
-
-service netmgrd /system/bin/netmgrd
-    class late_start
 
 service SMD-daemon /system/bin/smdexe
     class main
@@ -115,12 +144,6 @@ service qc_kickstart /system/bin/qcks s
     seclabel u:r:kickstart:s0
     group radio cache inet misc audio sdcard_rw log
 
-service secril-daemon /system/bin/sec-ril
-    class main
-    user root
-    seclabel u:r:secril-daemon:s0
-    group radio cache inet misc audio sdcard_rw qcom_diag log
-
 #For EncryptionMode - remove disabled, Modify class main
 service qmiproxy /system/bin/qmiproxy
     class main
@@ -131,8 +154,3 @@ service qmuxd /system/bin/qmuxd
     class main
     user system
     group radio log audio bluetooth gps log
-
-service gsiff_daemon /system/bin/gsiff_daemon
-    class late_start
-    user system
-    group qcom_oncrpc gps

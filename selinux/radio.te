@@ -1,2 +1,4 @@
 # Talk to qmuxd (/dev/socket/qmux_radio)
 qmux_socket(radio) ;
+
+allow radio secril-daemon:unix_stream_socket { connectto };

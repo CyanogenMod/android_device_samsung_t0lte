@@ -62,7 +62,6 @@
 /system/bin/efsks                u:object_r:kickstart_exec:s0
 /system/bin/ks                   u:object_r:kickstart_exec:s0
 /system/bin/qcks                 u:object_r:kickstart_exec:s0
-/system/bin/sec-ril              u:object_r:secril-daemon_exec:s0
 
 # Sockets
 /dev/socket/qmux_audio(/.*)?     u:object_r:qmuxd_socket:s0

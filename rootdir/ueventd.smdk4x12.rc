@@ -1,7 +1,7 @@
 /dev/mali                 0666   system     system
 /dev/ump                  0666   system     graphics
 /dev/ion                  0666   system     system
-/dev/exynos-mem           0660   system     camera
+/dev/exynos-mem           0660   system     graphics
 
 /dev/media0               0660   system     system
 /dev/media1               0660   system     camera
@@ -24,9 +24,9 @@
 /dev/v4l-subdev16         0660   system     system
 /dev/v4l-subdev17         0660   system     system
 
-/dev/video0               0666   system     system
+/dev/video0               0666   system     camera
 /dev/video1               0666   system     camera
-/dev/video2               0666   system     system
+/dev/video2               0666   system     graphics
 /dev/video3               0666   system     system
 /dev/video4               0666   system     system
 /dev/video11              0666   system     system
@@ -65,15 +65,19 @@
 /dev/i2c-2                0660   system     system
 /dev/i2c-5                0660   system     system
 /dev/i2c-6                0660   system     system
+/dev/i2c-7                0660   system     system
 /dev/CEC                  0660   system     system
 /dev/HPD                  0660   system     system
 /dev/fimg2d               0666   system     graphics
 /dev/fmradio              0660   system     audio
 
-#ALP Audio
+#ULP Audio
 /dev/srp                  0660   system     audio
+/dev/srp_ctrl             0660   system     audio
+/dev/umts*                0660   system     radio
+/dev/block/mmcblk0p7	  0660	 system	    radio
 
-/dev/s3c-mfc              0666   system     graphics
+/dev/s3c-mfc              0666   media      graphics
 /dev/s5p-mfc              0666   system     graphics
 
 /dev/block/mmcblk0p7      0660   system     root
@@ -83,13 +87,15 @@
 /dev/block/mmcblk0p6      0660   system     radio
 /dev/block/mmcblk0p11     0660   system     radio
 /dev/mdm                  0660   system     system
+
 #CPRM
 /dev/block/mmcblk1	      0660   root	    system
-/dev/ttyUSB0              0666   system     system
-/dev/ttyUSB1              0666   system     radio
-/dev/ttyUSB2              0666   system     system
-/dev/hsic*                0660   system     radio
+/dev/ttyUSB0              0660   system     system
+/dev/ttyUSB1              0660   system     radio
+/dev/ttyUSB2              0660   system     system
+/dev/hsic*                0666   system     radio
 /dev/usb/lp*              0660   system     usb
+/dev/ttyGS0               0660   system     system
 
 /dev/ttySAC*	          0660	 root	    system
 /dev/umts*                0660   system     radio

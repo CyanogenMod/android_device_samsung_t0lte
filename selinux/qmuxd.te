@@ -33,6 +33,7 @@ allow qmuxd sysfs_wake_lock:file { append open };
 
 #Allow qmuxd to write in hsic specific transport
 allow qmuxd sysfs:file w_file_perms;
+allow qmuxd radio_device:file w_file_perms;
 
 allow qmuxd self:capability { setuid setgid setpcap dac_override };
 

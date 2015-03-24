@@ -197,6 +197,9 @@
     <integer name="config_deviceHardwareWakeKeys">65</integer>
     
     <!-- Boolean to enable Stylus gestures -->
-    <!--<bool name="config_stylusGestures">true</bool>-->
+    <bool name="config_stylusGestures">true</bool>
+
+    <!-- Workaround for devices with broken keyboards -->
+    <bool name="config_forceDisableHardwareKeyboard">true</bool>
 
 </resources>
