@@ -11,7 +11,7 @@
 /dev/block/platform/dw_mmc/by-name/TOMBSTONES    /tombstones       ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
 
 # vold-managed volumes ("block device" is actually a sysfs devpath)
-/devices/platform/s3c-sdhci.2/mmc_host/mmc1*     auto        auto        defaults    voldmanaged=sdcard1:auto
+/devices/platform/s3c-sdhci.2/mmc_host/mmc1*     auto        auto        defaults    voldmanaged=sdcard1:auto,noemulatedsd
 /devices/platform/s5p-ehci*                      auto       auto        defaults    voldmanaged=usbdisk0:auto
 
 # recovery
