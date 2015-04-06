@@ -26,3 +26,4 @@ allow rild rild:process execmem;
 allow rild diagnostic_device:chr_file { read write open };
 allow rild radio_data_file:dir { setattr };
 allow rild init:unix_stream_socket { read write };
+allow rild proc_net:file { write };
