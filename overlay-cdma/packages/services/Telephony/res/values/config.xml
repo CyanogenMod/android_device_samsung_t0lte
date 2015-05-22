@@ -20,13 +20,6 @@
     <!-- Determines if device implements a noise suppression device for in call audio-->
     <bool name="has_in_call_noise_suppression">true</bool>
 
-    <!-- Sprint Message Wait Indicator Quirk
-    If true, message wait indicators are hidden by default on this device
-    unless the user enables it in Call Settings.  This quirk is necessary
-    for the "Phantom Voicemail" issue where notifications that are
-    impossible to dismiss on the Sprint network. -->
-    <bool name="sprint_mwi_quirk">true</bool>
-
     <!-- Determine whether calls to mute the microphone in PhoneUtils
          are routed through the android.media.AudioManager class (true) or through
          the com.android.internal.telephony.Phone interface (false). -->
