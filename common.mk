@@ -30,6 +30,12 @@ endif
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+# Init files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.smdk4x12.rc:root/ueventd.smdk4x12.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.smdk4x12.rc:recovery/root/ueventd.smdk4x12.rc
+
 # Audio
 PRODUCT_PACKAGES += \
     tiny_hw
@@ -37,6 +43,10 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     camera.smdk4x12
+
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.smdk4x12
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -66,12 +76,9 @@ PRODUCT_PACKAGES += \
     Stk \
     SamsungServiceMode
 
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
-
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=SamsungQualcommRIL \
-    mobiledata.interfaces=pdp0,wlan0,gprs,ppp0
+    mobiledata.interfaces=pdp0,gprs,ppp0,rmnet0,rmnet1
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
