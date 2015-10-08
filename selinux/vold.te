@@ -1,2 +1,0 @@
-allow vold kernel:system { module_request };
-allow vold mmc_block_device:blk_file { read write open ioctl getattr };

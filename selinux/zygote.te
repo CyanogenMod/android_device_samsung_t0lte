@@ -1,3 +1,0 @@
-allow zygote shell_data_file:dir search;
-allow zygote devpts:chr_file { read write };
-allow zygote init_shell:process { sigchld };
