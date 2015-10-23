@@ -3,16 +3,16 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 # data partition must be located at the bottom for supporting device encryption
-/dev/block/platform/dw_mmc/by-name/SYSTEM    /system           ext4      ro                                                                                 wait
-/dev/block/platform/dw_mmc/by-name/EFS       /efs              ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
-/dev/block/platform/dw_mmc/by-name/CACHE     /cache            ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
-/dev/block/platform/dw_mmc/by-name/RADIO     /firmware         vfat      ro,shortname=lower,fmask=0133,dmask=0022                                           wait
-/dev/block/platform/dw_mmc/by-name/USERDATA  /data             ext4      noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic     wait,check,encryptable=footer
+/dev/block/platform/dw_mmc/by-name/SYSTEM        /system           ext4      ro                                                                                 wait
+/dev/block/platform/dw_mmc/by-name/EFS           /efs              ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
+/dev/block/platform/dw_mmc/by-name/CACHE         /cache            ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
+/dev/block/platform/dw_mmc/by-name/RADIO         /firmware         vfat      ro,shortname=lower,fmask=0133,dmask=0022                                           wait
+/dev/block/platform/dw_mmc/by-name/USERDATA      /data             ext4      noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic     wait,check,encryptable=footer
 /dev/block/platform/dw_mmc/by-name/TOMBSTONES    /tombstones       ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
 
 # vold-managed volumes ("block device" is actually a sysfs devpath)
 /devices/platform/s3c-sdhci.2/mmc_host/mmc1*     auto        auto        defaults    voldmanaged=sdcard1:auto,noemulatedsd
-/devices/platform/s5p-ehci*                      auto       auto        defaults    voldmanaged=usbdisk0:auto
+/devices/platform/s5p-ehci*                      auto        auto        defaults    voldmanaged=usb:auto
 
 # recovery
 /dev/block/platform/dw_mmc/by-name/BOOT                            /boot                   emmc        defaults    recoveryonly
