@@ -1,6 +1,7 @@
 import init.bt.rc
 
 on init
+    export LD_PRELOAD "/system/lib/libsamsung_symbols.so"
     # Vibetonz
     export VIBE_PIPE_PATH /dev/pipes
     mkdir /dev/pipes 0771 shell shell
