@@ -1,0 +1,2 @@
+allow sdcardd kernel:system { module_request };
+allow sdcardd log_device:chr_file { open write };
