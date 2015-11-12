@@ -48,4 +48,4 @@ r_dir_file(qmuxd, sysfs_ssr);
 allow qmuxd mhi_device:chr_file rw_file_perms;
 
 allow qmuxd qmuxd:process { execmem };
-allow qmuxd radio_device:chr_file {read write open };
+allow qmuxd radio_device:chr_file { read write open };

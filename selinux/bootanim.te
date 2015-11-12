@@ -1,0 +1,2 @@
+allow bootanim kernel:system { module_request };
+allow bootanim log_device:chr_file { open write };
