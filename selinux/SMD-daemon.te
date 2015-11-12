@@ -1,0 +1,4 @@
+type SMD-daemon, domain;
+type SMD-daemon_exec, exec_type, file_type;
+
+allow SMD-daemon system_file:file { execute_no_trans };

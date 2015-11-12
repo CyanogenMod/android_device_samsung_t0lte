@@ -3,3 +3,7 @@ allow system_server uhid_device:file { read write open ioctl };
 allow system_server uhid_device:chr_file { read write open ioctl };
 allow system_server efs_file:dir { search };
 allow system_server efs_file:file r_file_perms;
+allow system_server dex2oat_exec:file { execute execute_no_trans read open };
+allow system_server log_device:chr_file { open write };
+allow system_server system_file:file { execmod };
+allow system_server self:capability sys_module;

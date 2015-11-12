@@ -1,0 +1,2 @@
+allow fsck efs_block_device:blk_file { getattr open read write ioctl };
+allow fsck fsck:capability { dac_override };
