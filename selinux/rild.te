@@ -19,7 +19,7 @@ allow rild rild_socket:chr_file { open read write };
 allow rild sysfs_ssr:dir r_dir_perms;
 allow rild sysfs_ssr:lnk_file read;
 allow rild system_data_file:dir w_dir_perms;
-allow rild system_data_file:file create_file_perms;
+#allow rild system_data_file:file create_file_perms;
 #allow rild time_daemon:unix_stream_socket connectto;
 
 allow rild rild:process execmem;
@@ -27,3 +27,7 @@ allow rild diagnostic_device:chr_file { read write open };
 allow rild radio_data_file:dir { setattr };
 allow rild init:unix_stream_socket { read write };
 allow rild proc_net:file { write };
+
+allow rild log_device:chr_file { open };
+allow rild log_device:chr_file write;
+allow rild self:capability dac_override;

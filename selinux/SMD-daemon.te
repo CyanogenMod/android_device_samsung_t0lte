@@ -1,0 +1,2 @@
+type SMD-daemon, domain;
+type SMD-daemon_exec, exec_type, file_type;

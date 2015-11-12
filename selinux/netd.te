@@ -1,1 +1,1 @@
-allow netd kernel:system { module_request };
+allow netd log_device:chr_file { open write };

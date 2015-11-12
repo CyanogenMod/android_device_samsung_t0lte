@@ -1,0 +1,2 @@
+type at_distributor, domain;
+type at_distributor_exec, exec_type, file_type;

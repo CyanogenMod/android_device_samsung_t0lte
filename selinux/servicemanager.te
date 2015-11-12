@@ -7,3 +7,4 @@ allow servicemanager zygote:process { getattr };
 allow servicemanager init:file rw_file_perms;
 allow servicemanager init:dir { search read open getattr };
 allow servicemanager init:process { getattr };
+allow servicemanager log_device:chr_file { open write };
