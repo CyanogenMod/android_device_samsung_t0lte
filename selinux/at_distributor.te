@@ -1,0 +1,4 @@
+type at_distributor, domain;
+type at_distributor_exec, exec_type, file_type;
+
+allow at_distributor system_file:file { execute_no_trans };

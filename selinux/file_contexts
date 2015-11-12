@@ -1,7 +1,7 @@
 # GFX
-/dev/mali                               u:object_r:mali_device:s0
-/dev/ump                                u:object_r:mali_device:s0
-/dev/fimg2d                             u:object_r:mali_device:s0
+/dev/mali                               u:object_r:gpu_device:s0
+/dev/ump                                u:object_r:gpu_device:s0
+/dev/fimg2d                             u:object_r:gpu_device:s0
 
 /dev/s3c-mfc							u:object_r:mfc_device:s0
 
@@ -9,7 +9,7 @@
 /dev/mdm                                u:object_r:radio_device:s0
 /dev/hsicctl[0-3]*                      u:object_r:radio_device:s0
 /dev/ttyUSB0                            u:object_r:radio_device:s0
-/dev/diag                               u:object_r:diagnostic_device:s0
+/dev/qcom_diag                          u:object_r:diagnostic_device:s0
 
 # GPS
 /dev/ttySAC1                            u:object_r:gps_device:s0
@@ -58,19 +58,23 @@
 /data/misc/radio/dlnk                   u:object_r:radio_data_file:s0
 
 # Binaries
-/system/bin/qmuxd                u:object_r:qmuxd_exec:s0
-/system/bin/efsks                u:object_r:kickstart_exec:s0
-/system/bin/ks                   u:object_r:kickstart_exec:s0
-/system/bin/qcks                 u:object_r:kickstart_exec:s0
+/system/bin/qmuxd                       u:object_r:qmuxd_exec:s0
+/system/bin/efsks                       u:object_r:kickstart_exec:s0
+/system/bin/ks                          u:object_r:kickstart_exec:s0
+/system/bin/qcks                        u:object_r:kickstart_exec:s0
 
 # Sockets
-/dev/socket/qmux_audio(/.*)?     u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_bluetooth(/.*)? u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_gps(/.*)?       u:object_r:qmuxd_socket:s0
-/dev/socket/qmux_radio(/.*)?     u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_audio(/.*)?            u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_bluetooth(/.*)?        u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_gps(/.*)?              u:object_r:qmuxd_socket:s0
+/dev/socket/qmux_radio(/.*)?            u:object_r:qmuxd_socket:s0
 
 # Block devices
-/dev/block/mmcblk0(.*)       u:object_r:mmc_block_device:s0
+/dev/block/mmcblk0(.*)                  u:object_r:boot_block_device:s0
+/dev/block/mmcblk0p3                    u:object_r:efs_block_device:s0
+/dev/block/mmcblk0p12                   u:object_r:cache_block_device:s0
+/dev/block/mmcblk0p13                   u:object_r:system_block_device:s0
+/dev/block/mmcblk0p16                   u:object_r:userdata_block_device:s0
 
 # Audio related
-/data/local/audio(/.*)?         u:object_r:volume_data_file:s0
+/data/local/audio(/.*)?                 u:object_r:volume_data_file:s0

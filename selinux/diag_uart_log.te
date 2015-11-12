@@ -1,0 +1,2 @@
+type diag_uart_log, domain;
+type diag_uart_log_exec, exec_type, file_type;
