@@ -1,0 +1,2 @@
+add_lunch_combo cm_t0lte-userdebug
+add_lunch_combo cm_t0lte-eng
