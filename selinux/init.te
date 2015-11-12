@@ -1,14 +1,15 @@
 allow init wpa_socket:unix_dgram_socket { bind create };
-allow init su_exec:file { execute_no_trans };
+#allow init su_exec:file { execute_no_trans };
 allow init init:process { execmem };
 allow init init:capability { sys_module };
 allow init radio_efs_file:filesystem { relabelto };
 allow init app_data_file:dir { read open setattr getattr relabelfrom };
 
-allow init_shell kernel:system { syslog_mod };
+allow init kernel:system syslog_read;
 allow init init:packet_socket { create bind write read };
 allow init init:rawip_socket { create setopt write };
 
-allow init_shell init:packet_socket { read write };
-
-
+#allow init_shell init:packet_socket { read write };
+allow init log_device:chr_file { write };
+allow init kernel:system { module_request };
+#allow init system_file:file execute_no_trans;
