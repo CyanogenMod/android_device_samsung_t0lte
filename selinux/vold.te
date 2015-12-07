@@ -1,3 +1,5 @@
 allow vold boot_block_device:blk_file { read write open ioctl getattr };
 allow vold efs_file:dir { ioctl open read };
+allow vold efs_device_file:dir rw_dir_perms;
+allow vold efs_device_file:file rw_file_perms;
 allow vold log_device:chr_file { open write };
