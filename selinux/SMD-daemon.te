@@ -1,4 +1,18 @@
 type SMD-daemon, domain;
-type SMD-daemon_exec, exec_type, file_type;
 
-allow SMD-daemon system_file:file { execute_no_trans };
+permissive SMD-daemon;
+
+allow SMD-daemon device:dir { write remove_name add_name };
+allow SMD-daemon efs_block_device:blk_file { read open };
+allow SMD-daemon efs_device_file:dir search;
+allow SMD-daemon efs_file:file { read write open };
+allow SMD-daemon init:unix_stream_socket connectto;
+allow SMD-daemon log_device:chr_file { write open };
+allow SMD-daemon log_device:dir search;
+allow SMD-daemon property_socket:sock_file write;
+allow SMD-daemon radio_device:chr_file { read write ioctl open };
+allow SMD-daemon radio_prop:property_service set;
+allow SMD-daemon self:capability { setuid };
+allow SMD-daemon sysfs_radio:file { read write open };
+allow SMD-daemon usbfs:dir search;
+allow SMD-daemon self:capability dac_override;

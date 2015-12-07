@@ -28,3 +28,5 @@ type persist_data_file, file_type;
 type persist_drm_file, file_type;
 type data_drm_file, file_type;
 
+type efs_device_file, file_type;
+type sysfs_radio, fs_type, sysfs_type;

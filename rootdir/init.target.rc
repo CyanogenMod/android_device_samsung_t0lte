@@ -142,6 +142,7 @@ service diag_uart_log /system/bin/diag_uart_log
 service SMD-daemon /system/bin/smdexe
     class main
     user root
+    seclabel u:r:SMD-daemon:s0
     group system radio inet net_raw
 
 service qc_kickstart /system/bin/qcks s
