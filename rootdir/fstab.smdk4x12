@@ -6,8 +6,10 @@
 /dev/block/platform/dw_mmc/by-name/SYSTEM        /system           ext4      ro                                                                                 wait
 /dev/block/platform/dw_mmc/by-name/EFS           /efs              ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
 /dev/block/platform/dw_mmc/by-name/CACHE         /cache            ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
+/dev/block/platform/dw_mmc/by-name/CACHE		 /cache			   f2fs		 noatime,nosuid,nodev		                                                        wait
 /dev/block/platform/dw_mmc/by-name/RADIO         /firmware         vfat      ro,shortname=lower,fmask=0133,dmask=0022                                           wait
-/dev/block/platform/dw_mmc/by-name/USERDATA      /data             ext4      noatime,nosuid,nodev,noauto_da_alloc,journal_async_commit,errors=panic     wait,check,encryptable=footer
+/dev/block/platform/dw_mmc/by-name/USERDATA      /data             ext4      noatime,nosuid,nodev,noauto_da_alloc,journal_async_commit,errors=panic             wait,check,encryptable=footer
+/dev/block/platform/dw_mmc/by-name/USERDATA      /data             f2fs      noatime,nosuid,nodev                                                               wait,check,encryptable=footer
 /dev/block/platform/dw_mmc/by-name/TOMBSTONES    /tombstones       ext4      noatime,nosuid,nodev,journal_async_commit,errors=panic                             wait,check
 
 # vold-managed volumes ("block device" is actually a sysfs devpath)
