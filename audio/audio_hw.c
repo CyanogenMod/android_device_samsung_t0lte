@@ -19,7 +19,7 @@
  */
 
 #define LOG_TAG "audio_hw_primary"
-#define LOG_NDEBUG 0
+//#define LOG_NDEBUG 0
 
 #include <errno.h>
 #include <pthread.h>
@@ -283,14 +283,14 @@ static int set_bigroute_by_array(struct mixer *mixer, struct route_setting *rout
                 if (ret != 0) {
                     ALOGE("Failed to set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
                 } else {
-                    ALOGV("Set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
+                    ALOGD("Set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
                 }
             } else {
                 ret = mixer_ctl_set_enum_by_string(ctl, "Off");
                 if (ret != 0) {
                     ALOGE("Failed to set '%s' to '%s'\n", route[i].ctl_name, route[i].strval);
                 } else {
-                    ALOGV("Set '%s' to '%s'\n", route[i].ctl_name, "Off");
+                    ALOGD("Set '%s' to '%s'\n", route[i].ctl_name, "Off");
                 }
             }
         } else {
@@ -301,14 +301,14 @@ static int set_bigroute_by_array(struct mixer *mixer, struct route_setting *rout
                     if (ret != 0) {
                         ALOGE("Failed to set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
                     } else {
-                        ALOGV("Set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
+                        ALOGD("Set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
                     }
                 } else {
                     ret = mixer_ctl_set_value(ctl, j, 0);
                     if (ret != 0) {
                         ALOGE("Failed to set '%s' to '%d'\n", route[i].ctl_name, route[i].intval);
                     } else {
-                        ALOGV("Set '%s' to '%d'\n", route[i].ctl_name, 0);
+                        ALOGD("Set '%s' to '%d'\n", route[i].ctl_name, 0);
                     }
                 }
             }
@@ -341,7 +341,7 @@ static int set_route_by_array(struct mixer *mixer, struct route_setting *route,
         ALOGE("Failed to set '%s' to '%s'\n",
              route[i].ctl_name, route[i].strval);
         } else {
-        ALOGV("Set '%s' to '%s'\n",
+        ALOGD("Set '%s' to '%s'\n",
              route[i].ctl_name, route[i].strval);
         }
 
@@ -353,7 +353,7 @@ static int set_route_by_array(struct mixer *mixer, struct route_setting *route,
             ALOGE("Failed to set '%s'.%d to %d\n",
              route[i].ctl_name, j, route[i].intval);
         } else {
-            ALOGV("Set '%s'.%d to %d\n",
+            ALOGD("Set '%s'.%d to %d\n",
              route[i].ctl_name, j, route[i].intval);
         }
         }
@@ -371,8 +371,8 @@ void select_devices(struct m0_audio_device *adev)
     if (adev->active_out_device == adev->out_device && adev->active_in_device == adev->in_device)
     return;
 
-    ALOGV("Changing output device %x => %x\n", adev->active_out_device, adev->out_device);
-    ALOGV("Changing input device %x => %x\n", adev->active_in_device, adev->in_device);
+    ALOGI("Changing output device %x => %x\n", adev->active_out_device, adev->out_device);
+    ALOGI("Changing input device %x => %x\n", adev->active_in_device, adev->in_device);
 
     /* Turn on new devices first so we don't glitch due to powerdown... */
     for (i = 0; i < adev->num_dev_cfgs; i++)
@@ -406,7 +406,7 @@ void select_devices(struct m0_audio_device *adev)
 
 static int start_call(struct m0_audio_device *adev)
 {
-    ALOGV("Opening modem PCMs");
+    ALOGI("Opening modem PCMs");
     int bt_on;
 
     bt_on = adev->out_device & AUDIO_DEVICE_OUT_ALL_SCO;
@@ -444,7 +444,7 @@ static int start_call(struct m0_audio_device *adev)
 
     /* Open bluetooth PCM channels */
     if (bt_on) {
-        ALOGV("Opening bluetooth PCMs");
+        ALOGI("Opening bluetooth PCMs");
         if (adev->pcm_bt_dl == NULL) {
             ALOGD("Opening PCM bluetooth DL stream");
             adev->pcm_bt_dl = pcm_open(CARD_DEFAULT, PORT_BT, PCM_OUT, &pcm_config_vx);
@@ -491,13 +491,13 @@ static void end_call(struct m0_audio_device *adev)
     if (adev->pcm_modem_dl != NULL) {
         ALOGD("Stopping modem DL PCM");
         pcm_stop(adev->pcm_modem_dl);
-        ALOGV("Closing modem DL PCM");
+        ALOGD("Closing modem DL PCM");
         pcm_close(adev->pcm_modem_dl);
     }
     if (adev->pcm_modem_ul != NULL) {
         ALOGD("Stopping modem UL PCM");
         pcm_stop(adev->pcm_modem_ul);
-        ALOGV("Closing modem UL PCM");
+        ALOGD("Closing modem UL PCM");
         pcm_close(adev->pcm_modem_ul);
     }
     adev->pcm_modem_dl = NULL;
@@ -507,13 +507,13 @@ static void end_call(struct m0_audio_device *adev)
         if (adev->pcm_bt_dl != NULL) {
             ALOGD("Stopping bluetooth DL PCM");
             pcm_stop(adev->pcm_bt_dl);
-            ALOGV("Closing bluetooth DL PCM");
+            ALOGD("Closing bluetooth DL PCM");
             pcm_close(adev->pcm_bt_dl);
         }
         if (adev->pcm_bt_ul != NULL) {
             ALOGD("Stopping bluetooth UL PCM");
             pcm_stop(adev->pcm_bt_ul);
-            ALOGV("Closing bluetooth UL PCM");
+            ALOGD("Closing bluetooth UL PCM");
             pcm_close(adev->pcm_bt_ul);
         }
     }
@@ -569,7 +569,7 @@ static void set_incall_device(struct m0_audio_device *adev)
             break;
     }
 
-    ALOGV("rx_dev_id=%d, tx_dev_id=%d\n", rx_dev_id, tx_dev_id);
+    ALOGD("rx_dev_id=%d, tx_dev_id=%d\n", rx_dev_id, tx_dev_id);
 
     /* QCOM CSD-CLIENT */
     if (!adev->in_call) {
@@ -596,9 +596,9 @@ static void set_incall_device(struct m0_audio_device *adev)
 
     adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
 
-    /* Restart pcm only if switching off or onto bt to adjust to amr */
+    /* Restart pcm only if switching off or onto bt to adjust the amr */
     if(old_rx_dev == DEVICE_BT_SCO_RX_ACDB_ID || rx_dev_id == DEVICE_BT_SCO_RX_ACDB_ID){
-        ALOGI("%s: old_rx_dev: %i", __func__, old_rx_dev);
+        ALOGD("%s: old_rx_dev: %i", __func__, old_rx_dev);
         end_call(adev);
         start_call(adev);
     }
@@ -1040,7 +1040,7 @@ static int get_playback_delay(struct m0_stream_out *out,
         buffer->time_stamp.tv_sec  = 0;
         buffer->time_stamp.tv_nsec = 0;
         buffer->delay_ns           = 0;
-        ALOGV("%s: pcm_get_htimestamp error,"
+        ALOGE("%s: pcm_get_htimestamp error,"
                 "setting playbackTimestamp to 0", __func__);
         return status;
     }
@@ -1539,7 +1539,7 @@ static int start_input_stream(struct m0_stream_in *in)
                                &in->buf_provider,
                                &in->resampler);
         }
-        ALOGV("%s: New channel configuration, "
+        ALOGD("%s: New channel configuration, "
                 "main_channels = [%04x], aux_channels = [%04x], config.channels = %d",
                 __func__, in->main_channels, in->aux_channels, in->config.channels);
     }
@@ -1753,7 +1753,7 @@ static void get_capture_delay(struct m0_stream_in *in,
 
     buffer->time_stamp = tstamp;
     buffer->delay_ns   = delay_ns;
-    ALOGV("%s: time_stamp = [%ld].[%ld], delay_ns: [%d],"
+    ALOGD("%s: time_stamp = [%ld].[%ld], delay_ns: [%d],"
          " kernel_delay:[%ld], buf_delay:[%ld], rsmp_delay:[%ld], kernel_frames:[%d], "
          "in->read_buf_frames:[%d], in->proc_buf_frames:[%d], frames:[%d]",
          __func__, buffer->time_stamp.tv_sec , buffer->time_stamp.tv_nsec, buffer->delay_ns,
@@ -1767,7 +1767,7 @@ static int32_t update_echo_reference(struct m0_stream_in *in, size_t frames)
     struct echo_reference_buffer b;
     b.delay_ns = 0;
 
-    ALOGV("%s: frames = [%d], in->ref_frames_in = [%d],  "
+    ALOGD("%s: frames = [%d], in->ref_frames_in = [%d],  "
           "b.frame_count = [%d]",
          __func__, frames, in->ref_buf_frames, frames - in->ref_buf_frames);
     if (in->ref_buf_frames < frames) {
@@ -1776,7 +1776,7 @@ static int32_t update_echo_reference(struct m0_stream_in *in, size_t frames)
             in->ref_buf = (int16_t *)realloc(in->ref_buf, pcm_frames_to_bytes(in->pcm, frames));
             ALOG_ASSERT((in->ref_buf != NULL),
                         "%s failed to reallocate ref_buf", __func__);
-            ALOGV("%s: ref_buf %p extended to %d bytes",
+            ALOGD("%s: ref_buf %p extended to %d bytes",
                       __func__, in->ref_buf, pcm_frames_to_bytes(in->pcm, frames));
         }
         b.frame_count = frames - in->ref_buf_frames;
@@ -1886,7 +1886,7 @@ static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
             in->read_buf = (int16_t *) realloc(in->read_buf, size_in_bytes);
             ALOG_ASSERT((in->read_buf != NULL),
                         "%s failed to reallocate read_buf", __func__);
-            ALOGV("%s: read_buf %p extended to %d bytes",
+            ALOGD("%s: read_buf %p extended to %d bytes",
                   __func__, in->read_buf, size_in_bytes);
         }
 
@@ -2000,7 +2000,7 @@ static ssize_t process_frames(struct m0_stream_in *in, void* buffer, ssize_t fra
                                 "%s failed to reallocate proc_buf_out", __func__);
                     proc_buf_out = in->proc_buf_out;
                 }
-                ALOGV("process_frames(): proc_buf_in %p extended to %d bytes",
+                ALOGD("process_frames(): proc_buf_in %p extended to %d bytes",
                      in->proc_buf_in, size_in_bytes);
             }
             frames_rd = read_frames(in,
@@ -2447,7 +2447,7 @@ static int in_add_audio_effect(const struct audio_stream *stream,
     /* check compatibility between main channel supported and possible auxiliary channels */
     in_update_aux_channels(in, effect);
 
-    ALOGV("%s: effect type: %08x", __func__, desc.type.timeLow);
+    ALOGD("%s: effect type: %08x", __func__, desc.type.timeLow);
 
     if (memcmp(&desc.type, FX_IID_AEC, sizeof(effect_uuid_t)) == 0) {
         in->need_echo_reference = true;
@@ -3028,7 +3028,7 @@ static void adev_config_start(void *data, const XML_Char *elem,
         return;
     }
 
-    ALOGV("Parsing control %s => %s\n", name, val);
+    ALOGD("Parsing control %s => %s\n", name, val);
 
     r = realloc(s->path, sizeof(*r) * (s->path_len + 1));
     if (!r) {
@@ -3059,7 +3059,7 @@ static void adev_config_end(void *data, const XML_Char *name)
         ALOGW("Empty path\n");
 
     if (!s->dev) {
-        ALOGV("Applying %d element default route\n", s->path_len);
+        ALOGD("Applying %d element default route\n", s->path_len);
 
         set_route_by_array(s->adev->mixer, s->path, s->path_len);
 
@@ -3072,12 +3072,12 @@ static void adev_config_end(void *data, const XML_Char *name)
 
         /* Refactor! */
     } else if (s->on) {
-        ALOGV("%d element on sequence\n", s->path_len);
+        ALOGD("%d element on sequence\n", s->path_len);
         s->dev->on = s->path;
         s->dev->on_len = s->path_len;
 
     } else {
-        ALOGV("%d element off sequence\n", s->path_len);
+        ALOGD("%d element off sequence\n", s->path_len);
 
         /* Apply it, we'll reenable anything that's wanted later */
         set_route_by_array(s->adev->mixer, s->path, s->path_len);
@@ -3104,7 +3104,7 @@ static int adev_config_parse(struct m0_audio_device *adev)
     int len;
     char buf[1024];
 
-    ALOGV("Reading configuration from %s\n", CONFIG_FILE);
+    ALOGD("Reading configuration from %s\n", CONFIG_FILE);
     f = fopen(CONFIG_FILE, "r");
     if (!f) {
     ALOGE("Failed to open %s\n", CONFIG_FILE);

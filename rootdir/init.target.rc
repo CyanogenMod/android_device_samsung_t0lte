@@ -8,7 +8,6 @@ on init
     mkdir /dev/pipes 0771 shell shell
 
 on post-fs-data
-
  #MDM requirement
     mkdir /data/cp_log
     chmod 0775 /data/cp_log
@@ -117,14 +116,6 @@ on post-fs-data
     mkdir /data/misc/location/xtwifi 0770 gps gps
 
     chmod 0755 /proc/cmdline
-
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 04e8
-    write /sys/class/android_usb/android0/idProduct 6860
-    write /sys/class/android_usb/android0/functions mtp,adb
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    setprop sys.usb.state mtp,adb
 
 on fs
     # zram
