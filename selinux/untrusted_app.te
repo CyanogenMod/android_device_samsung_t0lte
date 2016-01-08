@@ -4,3 +4,5 @@ allow untrusted_app kernel:system { module_request };
 allow untrusted_app firmware_camera:dir { read getattr open };
 allow untrusted_app firmware_camera:file getattr;
 allow untrusted_app firmware_mfc:file getattr;
+allow untrusted_app efs_file:dir getattr;
+allow untrusted_app device:dir { open read };
