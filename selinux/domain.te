@@ -1,5 +1,3 @@
-## /dev/mali, /dev/ump
-allow domain mali_device:chr_file rw_file_perms;
 allow domain at_distributor:chr_file rw_file_perms;
 allow domain diag_uart_log:chr_file rw_file_perms;
 allow domain SMD-daemon:chr_file rw_file_perms;
