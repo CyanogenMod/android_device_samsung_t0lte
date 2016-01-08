@@ -1,4 +1,3 @@
-type mali_device, dev_type, mlstrustedobject;
 type mfc_device, dev_type;
 type rfkill_device, dev_type;
 type wlan_device, dev_type;
