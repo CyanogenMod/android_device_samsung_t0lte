@@ -131,17 +131,20 @@ on property:sys.boot_completed=1
 service at_distributor /system/bin/at_distributor
     class late_start
     user root
+    seclabel u:r:at_distributor:s0
     group radio log
 
 # diag app for cp uart
 service diag_uart_log /system/bin/diag_uart_log
     class main
     user root
+    seclabel u:r:diag_uart_log:s0
     group radio
 
 service SMD-daemon /system/bin/smdexe
     class main
     user root
+    seclabel u:r:SMD-daemon:s0
     group system radio inet net_raw
 
 service qc_kickstart /system/bin/qcks s

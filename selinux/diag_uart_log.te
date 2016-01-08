@@ -1,2 +1,7 @@
 type diag_uart_log, domain;
+permissive diag_uart_log;
+
 type diag_uart_log_exec, exec_type, file_type;
+
+allow diag_uart_log init:process { noatsecure rlimitinh siginh };
+allow diag_uart_log log_device:chr_file { open write };
