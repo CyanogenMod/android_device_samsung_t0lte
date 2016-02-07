@@ -13,7 +13,6 @@ allow init tmpfs:lnk_file { create };
 allow init sysfs:lnk_file { setattr };
 
 #allow init_shell init:packet_socket { read write };
-allow init log_device:chr_file { write };
 allow init kernel:system { module_request };
 #allow init system_file:file execute_no_trans;
 allow init block_device:lnk_file { setattr };

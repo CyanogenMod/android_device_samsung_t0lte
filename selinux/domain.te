@@ -8,4 +8,3 @@ allow domain qmiproxy:chr_file rw_file_perms;
 userdebug_or_eng(`
 			  allow domain diag_device:chr_file rw_file_perms;
 ') 
-dontaudit domain kernel:system module_request;
