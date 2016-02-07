@@ -1,2 +1,0 @@
-allow debuggerd log_device:chr_file { read open write };
-allow debuggerd log_device:dir { search };

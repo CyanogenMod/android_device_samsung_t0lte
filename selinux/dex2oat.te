@@ -1,2 +1,0 @@
-allow dex2oat log_device:chr_file { write open };
-allow dex2oat log_device:dir search;

@@ -1,1 +1,0 @@
-allow netd log_device:chr_file { open write };

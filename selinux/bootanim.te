@@ -1,1 +1,0 @@
-allow bootanim log_device:chr_file { open write };
