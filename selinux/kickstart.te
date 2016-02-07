@@ -49,5 +49,4 @@ allow kickstart vfat:file { getattr read open };
 allow kickstart kickstart:process { execmem };
 allow kickstart usbfs:dir { search };
 allow kickstart vfat:dir { search };
-allow kickstart log_device:chr_file { open write };
 allow kickstart rild_exec:file { getattr execute read open };

@@ -1,4 +1,3 @@
 allow bluetooth smd_device:chr_file { read write ioctl open };
-allow bluetooth log_device:chr_file { write open };
 #allow bluetooth sysfs:file { write };
 
