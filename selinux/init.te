@@ -1,3 +1,5 @@
+permissive init;
+
 allow init wpa_socket:unix_dgram_socket { bind create };
 #allow init su_exec:file { execute_no_trans };
 allow init init:process { execmem };
