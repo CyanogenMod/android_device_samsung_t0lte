@@ -43,7 +43,8 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.smdk4x12
+    camera.smdk4x12 \
+    Snap
 
 # Sensors
 PRODUCT_PACKAGES += \
