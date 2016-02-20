@@ -1,5 +1,6 @@
 # kickstart processes and scripts
 type kickstart, domain;
+permissive kickstart;
 type kickstart_exec, exec_type, file_type;
 
 # kickstart_checker.sh talks to init over the property socket

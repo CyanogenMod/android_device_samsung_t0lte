@@ -1,5 +1,6 @@
 # sec-ril
 type secril-daemon, domain;
+permissive secril-daemon;
 type secril-daemon_exec, exec_type, file_type;
 
 # Start /system/bin/sec-ril from init
