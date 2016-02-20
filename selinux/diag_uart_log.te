@@ -1,7 +1,12 @@
 type diag_uart_log, domain;
-permissive diag_uart_log;
-
 type diag_uart_log_exec, exec_type, file_type;
+init_daemon_domain(diag_uart_log)
 
 allow diag_uart_log init:process { noatsecure rlimitinh siginh };
+
 allow diag_uart_log log_device:chr_file { open write };
+allow diag_uart_log log_device:dir { search };
+
+allow diag_uart_log at_distributor:unix_stream_socket { connectto };
+
+allow diag_uart_log self:capability { setuid };
