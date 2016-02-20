@@ -30,10 +30,11 @@ allow rild proc_net:file { write };
 
 allow rild log_device:chr_file { open };
 allow rild log_device:chr_file write;
+allow rild log_device:dir { search };
 allow rild self:capability dac_override;
 
 allow rild unlabeled:dir { search };
-	
+
 allow rild at_distributor:dir { search };
 allow rild at_distributor:file { read open getattr };
 
