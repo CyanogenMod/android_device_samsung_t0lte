@@ -1,3 +1,4 @@
+permissive qmuxd;
 type qmuxd, domain;
 type qmuxd_exec, exec_type, file_type;
 net_domain(qmuxd)
