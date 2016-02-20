@@ -1,5 +1,6 @@
 type at_distributor, domain;
 permissive at_distributor;
 type at_distributor_exec, exec_type, file_type;
+init_daemon_domain(at_distributor)
 
 allow at_distributor system_file:file { execute_no_trans };

@@ -3,13 +3,14 @@
 /dev/ump                                u:object_r:gpu_device:s0
 /dev/fimg2d                             u:object_r:gpu_device:s0
 
-/dev/s3c-mfc							u:object_r:mfc_device:s0
+/dev/s3c-mfc				u:object_r:mfc_device:s0
 
 # RIL
 /dev/mdm                                u:object_r:radio_device:s0
 /dev/hsicctl[0-3]*                      u:object_r:radio_device:s0
 /dev/ttyUSB0                            u:object_r:radio_device:s0
 /dev/qcom_diag                          u:object_r:diagnostic_device:s0
+/dev/ttySAC2				u:object_r:radio_device:s0
 
 # GPS
 /dev/ttySAC1                            u:object_r:gps_device:s0
@@ -60,6 +61,10 @@
 /system/bin/efsks                       u:object_r:kickstart_exec:s0
 /system/bin/ks                          u:object_r:kickstart_exec:s0
 /system/bin/qcks                        u:object_r:kickstart_exec:s0
+/system/bin/qmiproxy			u:object_r:qmiproxy_exec:s0
+/system/bin/at_distributor		u:object_r:at_distributor_exec:s0
+/system/bin/smdexe			u:object_r:SMD-daemon_exec:s0
+/system/bin/diag_uart_log		u:object_r:diag_uart_log_exec:s0
 
 # Sockets
 /dev/socket/qmux_audio(/.*)?            u:object_r:qmuxd_socket:s0
