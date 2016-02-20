@@ -1,3 +1,4 @@
+permissive secril-daemon;
 # sec-ril
 type secril-daemon, domain;
 type secril-daemon_exec, exec_type, file_type;

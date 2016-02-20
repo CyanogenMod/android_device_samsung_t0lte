@@ -1,6 +1,8 @@
+permissive radio;
 # Talk to qmuxd (/dev/socket/qmux_radio)
 qmux_socket(radio) ;
 
 allow radio secril-daemon:unix_stream_socket { connectto };
 allow radio log_device:chr_file { write open };
 allow radio log_device:dir { search };
+allow radio system_app_data_file:dir { search };
