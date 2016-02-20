@@ -3,3 +3,15 @@ type qmiproxy_exec, exec_type, file_type;
 
 net_domain(qmiproxy)
 init_daemon_domain(qmiproxy)
+
+allow qmiproxy log_device:chr_file { open write };
+allow qmiproxy log_device:dir { search };
+
+allow qmiproxy qmuxd_socket:dir { search write add_name };
+allow qmiproxy qmuxd_socket:sock_file { create };
+allow qmiproxy property_socket:sock_file { open write };
+allow qmiproxy init:unix_stream_socket connectto;
+
+allow qmiproxy radio_prop:property_service { set };
+
+allow qmiproxy system_file:file { execmod };

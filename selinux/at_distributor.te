@@ -1,5 +1,33 @@
 type at_distributor, domain;
-permissive at_distributor;
 type at_distributor_exec, exec_type, file_type;
+init_daemon_domain(at_distributor)
 
 allow at_distributor system_file:file { execute_no_trans };
+
+allow at_distributor radio_device:chr_file { read write open ioctl };
+
+allow at_distributor rild:unix_stream_socket { connectto };
+
+allow at_distributor log_device:chr_file { open write };
+allow at_distributor log_device:dir { search };
+
+allow at_distributor efs_file:dir { search };
+allow at_distributor efs_file:file { read open getattr setattr };
+
+allow at_distributor radio_data_file:dir { search write add_name };
+allow at_distributor radio_data_file:file { open write create getattr read };
+
+allow at_distributor unlabeled:dir { search getattr };
+allow at_distributor unlabeled:file { open read write setattr getattr };
+
+allow at_distributor self:capability { dac_override chown fowner setuid fsetid };
+
+allow at_distributor property_socket:sock_file { open write };
+
+allow at_distributor diag_uart_log_exec:file { getattr };
+
+allow at_distributor init:unix_stream_socket { connectto };
+
+allow at_distributor radio_prop:property_service { set };
+
+allow at_distributor sysfs_wake_lock:file { read write open };
