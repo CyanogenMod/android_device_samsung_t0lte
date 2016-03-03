@@ -82,9 +82,9 @@ int GyroSensor::enable(int32_t handle, int en) {
     int flags = en ? 1 : 0;
     int err;
     if (flags != mEnabled) {
+         err = sspEnable(LOGTAG, SSP_GYRO, en);
          if(err >= 0){
              mEnabled = flags;
-             err = sspEnable(LOGTAG, SSP_GYRO, en);
              setInitialState();
 
              return 0;
