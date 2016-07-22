@@ -1,3 +1,3 @@
-#allow logd location_app:dir r_dir_perms;
-#allow logd location_app:file r_file_perms;
-allow logd log_device:chr_file { open write };
+allow domain log_device:chr_file { open write };
+allow domain log_device:dir { search };
+allow { shell debuggerd } log_device:chr_file { read };
