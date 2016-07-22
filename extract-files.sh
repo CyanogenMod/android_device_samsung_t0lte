@@ -18,6 +18,14 @@
 
 VENDOR=samsung
 DEVICE=t0lte
+COMMON=common
+
+if [ $COMMON = $1 ]
+then
+    COMMON="-common"
+else
+    COMMON=""
+fi
 
 mkdir -p ../../../vendor/$VENDOR/$DEVICE/proprietary
 
@@ -34,7 +42,7 @@ for FILE in `cat ../$DEVICE/proprietary-files.txt | grep -v ^# | grep -v ^$`; do
 done
 
 
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__VENDOR__/$VENDOR/g > ../../../vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__VENDOR__/$VENDOR/g > ../../../vendor/$VENDOR/$DEVICE/$DEVICE$COMMON-vendor-blobs.mk
 # Copyright (C) 2013 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,10 +69,10 @@ for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$`; do
     if [ $COUNT = "0" ]; then
         LINEEND=""
     fi
-    echo "    \$(LOCAL_PATH)/proprietary/$FILE:$FILE$LINEEND" >> ../../../vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk
+    echo "    \$(LOCAL_PATH)/proprietary/$FILE:$FILE$LINEEND" >> ../../../vendor/$VENDOR/$DEVICE/$DEVICE$COMMON-vendor-blobs.mk
 done
 
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__VENDOR__/$VENDOR/g > ../../../vendor/$VENDOR/$DEVICE/$DEVICE-vendor.mk
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__VENDOR__/$VENDOR/g > ../../../vendor/$VENDOR/$DEVICE/$DEVICE$COMMON-vendor.mk
 # Copyright (C) 2013 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -82,7 +90,7 @@ done
 # Pick up overlay for features that depend on non-open-source files
 DEVICE_PACKAGE_OVERLAYS += vendor/__VENDOR__/__DEVICE__/overlay
 
-\$(call inherit-product, vendor/__VENDOR__/__DEVICE__/__DEVICE__-vendor-blobs.mk)
+\$(call inherit-product, vendor/__VENDOR__/__DEVICE__/__DEVICE__$COMMON-vendor-blobs.mk)
 EOF
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__VENDOR__/$VENDOR/g > ../../../vendor/$VENDOR/$DEVICE/BoardConfigVendor.mk
@@ -102,4 +110,4 @@ EOF
 
 EOF
 
-./../../../device/samsung/smdk4412-common/extract-files.sh
+cd ./../../../device/samsung/smdk4412-common/ && ./extract-files.sh
