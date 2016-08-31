@@ -156,7 +156,6 @@ int AkmSensor::enable(int32_t handle, int en)
 
 int AkmSensor::setDelay(int32_t handle, int64_t ns)
 {
-    int what = -1;
     int fd;
     uint32_t sensor_type = 0;
 
@@ -185,8 +184,9 @@ int AkmSensor::setDelay(int32_t handle, int64_t ns)
         write(fd, buf, strlen(buf)+1);
         close(fd);
      }
-
-    mDelays[what] = ns;
+  for (int i= 0; i < numSensors ; i++){
+    mDelays[i] = ns;
+  }
     return 0;
 }
 
