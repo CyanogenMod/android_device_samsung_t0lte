@@ -185,7 +185,7 @@ int AkmSensor::setDelay(int32_t handle, int64_t ns)
         write(fd, buf, strlen(buf)+1);
         close(fd);
      }
-
+    what < 0 ? 0 : what;
     mDelays[what] = ns;
     return 0;
 }
