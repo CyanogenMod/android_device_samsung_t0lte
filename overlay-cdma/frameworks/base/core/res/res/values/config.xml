@@ -64,13 +64,13 @@
         <item>"rndis0"</item>
     </string-array>
 	
-    <integer-array name="config_data_usage_network_types">
+    <!-- <integer-array name="config_data_usage_network_types">
         <item>0</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
-      </integer-array>
+      </integer-array> -->
 
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
@@ -197,7 +197,7 @@
     <integer name="config_deviceHardwareWakeKeys">65</integer>
     
     <!-- Boolean to enable Stylus gestures -->
-    <bool name="config_stylusGestures">true</bool>
+    <!-- <bool name="config_stylusGestures">true</bool> -->
 
     <!-- The RadioAccessFamilies supported by the device.
          Empty is viewed as "all".  Only used on devices which
