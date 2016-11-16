@@ -58,7 +58,7 @@ PRODUCT_PACKAGES += \
     Tag
 
 PRODUCT_COPY_FILES += \
-    packages/apps/Nfc/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt \
+    $(LOCAL_PATH)/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
